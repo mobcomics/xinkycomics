@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--<meta name="viewport" content="width=1000; height=1529; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=0;" />
+-->
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE" />
+<title>Comics Pages</title>
+<link href="comicsreader.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://mobcomics.com/zines/angry/config.js?"+$.now()></script>
+<script type="text/javascript" src="viewer2.js"></script>
+<script type="text/javascript">loadScript();</script>
+</head>
+<body class="bodyStyle" id="bodyID">
+<div id='displaySizeID'>
+	<div class='navigatorTextStyle' id='navigatorText'></div>
+  	<a href id="pictureFrameLink"> 
+    	<span id="pictureFrame" class="pictureFrameStyle"></span>
+    </a>
+  	<img alt="" class="myPictureStyle" id="myPicture" onload="displayPanel();" />
+	<img src="next_gray.png" id="nextLinkImage" class="linkAreaCircleStyle"/>
+	<img src="nuoliforward.png" id="playIndicator" class="playIndicatorStyle"/>
+</div>
+</body>
+</html>

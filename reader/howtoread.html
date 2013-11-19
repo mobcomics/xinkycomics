@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE" />
+<title>How To Read</title>
+<link href="comicsreader.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script type="text/javascript" src="device_UI.js"></script>
+<script type="text/javascript" src="testComicData1.js"></script>
+<script type="text/javascript" src="localization.js"></script>
+<script type="text/javascript" src="howtoread.js"></script>
+</head>
+
+<body id="bodyId" class="bodyStyle">
+
+<img id='coverImage' class='myPictureStyle'/>
+<div id='transparentImageDiv' class='howToReadTransparentStyle'>
+	<img id='transparentImage' src='howtoreadtransparent.png'/>
+    </div>
+    	<a href='artist.html' class='linkAreaCircleStyle' id='previousCircleLink'>
+        	<img src='previous.png' id='previousCircleImage' class='noBorderStyle'/>
+        </a>
+        <a href='viewer.html' class='linkAreaCircleStyle' id='nextCircleLink'>
+        	<img src='next.png' id='nextCircleImage' class='noBorderStyle'/>
+        </a>
+        <a href='viewer.html' onclick='sessionStorage.autoplay=1;' class='linkAreaCircleStyle' id='autoplayCircleLink'>
+        	<img src='autoplay.png' id='autoplayCircleImage' class='noBorderStyle'/>
+        </a>
+</body>
+</html>
+

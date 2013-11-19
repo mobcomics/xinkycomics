@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Comics List</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+<link rel="stylesheet" href="css/angrywebcomics.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type='text/javascript' src="js/custom-script.js"></script>
+<script type="text/javascript" src="javascript/comicslist3.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script type="text/javascript" src="http://mobcomics.com/zines/angry/config.js?"+$.now()></script>
+<script type="text/javascript">loadScript();</script>
+</head>
+<body>
+<div data-role="header">
+    <span class="ui-title">Comics List</span>
+    <a href="index.html" rel="external" data-icon="home" class="ui-btn-left">Home</a>
+    <a href="#howtoread" data-rel="popup" data-icon="info" class="ui-btn-right">How?</a>
+</div>
+<ul id="comics2" data-role="listview" data-inset="true">
+</ul> 
+<div data-role="popup" id="comicinfo" data-theme="d" data-overlay-theme="b" class="ui-content" padding-bottom:2em;">
+    <h3 id='title'></h3>
+    <p><a id="creatorUrl" href="#"></a></p>    
+    <div id='description'></div>
+    <a id="read" href="#" data-role="button" rel="external" data-theme="a" data-inline="true" data-mini="true">Read</a>
+    <a id="cancel" href="#" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>
+</div>
+<div data-role="popup" id="howtoread" data-theme="d" data-overlay-theme="b" class="ui-content" padding-bottom:2em;">
+	<div>
+    <h3 >How to Read the Comics?</h3>
+    <ul>
+    	<li>Tap the right side of the screen to view the next panel</li>
+    	<li>Tap the left side of the screen to view the previous panel</li>
+    	<li>Tap the bottom of the screen to toggle on/off autoplay mode</li>
+        <li>Click the device's Back button to see the comics list</li>
+    </ul>
+    <div style="text-align:center"><img class="howToImageStyle" src="images/howtoread.png" /></div>
+    <a id="ok" href="#" data-role="button" data-rel="back" data-inline="true" data-mini="true">OK</a>
+    </div>
+</div>
+</body></html>
+
+

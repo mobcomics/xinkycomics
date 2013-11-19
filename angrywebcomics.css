@@ -1,0 +1,44 @@
+@charset "UTF-8";
+/* CSS Document */
+
+.splashScreenStyle {
+	background-color: #000;
+	text-align: center;
+	color: #FFF;
+}
+.titleBannerImageStyle {
+	height: 200px;
+	text-align: center;
+}
+.comicIconStyle {
+	width: 80px;
+	height: 80px;
+}
+.topIconStyle {
+	height: 20px;
+	width: 80px;
+}
+.bottomIconStyle {
+	height: 20px;
+	width: 80px;
+}
+.readButtonStyle {
+}
+.noFloatStyle {
+	float: none;
+}
+.comicReadiframeStyle {
+	margin: 0px;
+	padding: 0px;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+}
+.buttonStyle {
+	text-align: center;
+}
