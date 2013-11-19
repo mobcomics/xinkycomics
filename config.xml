@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.mobcomics.angrywebcomics.test" version="1.2.5" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Angry Webcomics</name>
+<widget id="com.mobcomics.xinkycomics" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>Xinky Comics</name>
     <description>
-        Angry Webcomics Zine is the collection of my favorite mobile webcomics.
+        Xinky Comics is the collection of my favorite mobile webcomics.
     </description>
     <author email="support@mobcomics.com" href="http://mobcomics.com">
         Mobcomics Team
