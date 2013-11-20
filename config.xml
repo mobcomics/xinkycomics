@@ -55,4 +55,5 @@
 	<access origin="http://aws.com" subdomains="true" />	
 	<access origin="http://amazonaws.com" subdomains="true" />	
 	<access origin="http://jquery.com" subdomains="true" />	
+	<access origin="http://smackjeeves.com" subdomains="true" />	
 </widget>

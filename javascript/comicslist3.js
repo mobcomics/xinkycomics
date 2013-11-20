@@ -45,7 +45,7 @@ function showComics2() {
 function updatePopup(i) {
 	var c = comics.comicsList[i];
 	$("#title").html(c.title);
-	$("#creatorUrl").attr("href", c.creatorUrl)
+	$("#creatorUrl").attr("href", c.creatorUrl);
 	$("#creatorUrl").html("By "+c.creatorNames+" (click to view Website)");	
 	$("#description").html(c.description);	
 	$("#read").attr("href", "reader/viewer.html?comic="+i);
@@ -62,7 +62,7 @@ function openBrowser(url) {
 
 function loadScript(){
 	if(!window.console){ window.console = {log: function(){} }; } 
-    var script = document.createElement("script")
+    var script = document.createElement("script");
     script.type = "text/javascript";
     script.onload = function(){
 		console.log("comicDataLoaded");

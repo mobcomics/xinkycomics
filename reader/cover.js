@@ -89,7 +89,7 @@ function platform() {
 }
 
 function loadScript(){
-    var script = document.createElement("script")
+    var script = document.createElement("script");
     script.type = "text/javascript";
     script.onload = function(){
 		console.log("comicDataLoaded");

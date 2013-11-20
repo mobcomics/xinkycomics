@@ -2,23 +2,6 @@
 var windowLoaded = false;
 var appDataLoaded = false;
 
-var gaPlugin;
-
-function onDeviceReady() {
-    gaPlugin = window.plugins.gaPlugin;
-    gaPlugin.init(successHandler, errorHandler, "UA-43872012-1", 10);
-}
-
-function successHandler() {
-//	console.log("success");
-}
-
-function errorHandler() {
-//	console.log("success");
-}
-
-//window.onload = init;
-
 $(window).load(function() { init(); });
 
 function init() {
@@ -43,14 +26,12 @@ function continueInit(i) {
 //	jQuery( window ).on( "swipe", function( event ) {
 //		$("#editor").html("zipe");								   
 //	});
-	gaPlugin.trackEvent(successHandler, errorHandler, "Button", "Click", "event only", 1);
-	gaPlugin.exit(successHandler, errorHandler);
 }
 
 
 function loadScript(){
 	if(!window.console){ window.console = {log: function(){} }; } 
-    var script = document.createElement("script")
+    var script = document.createElement("script");
     script.type = "text/javascript";
     script.onload = function(){
 		console.log("loadScript");

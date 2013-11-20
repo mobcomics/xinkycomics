@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>images/test1.png</name>
+			<type>1</type>
+			<location>/Users/thuttula/development/xinkymics/xinkycomics/images/test1.png</location>
+		</link>
+	</linkedResources>
 </projectDescription>

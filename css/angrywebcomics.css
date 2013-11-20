@@ -14,3 +14,12 @@
 	border: 3px solid #666;
 	width: 300px;
 }
+
+
+.pageThumbnailStyle {
+/*  transform: scale(5);  zoom factor - prefix if needed */
+  width: 100px; /* half of iframe width */
+  margin: 0px 0 0 0px; /* reposition iframe */
+
+  overflow: hidden; /* remove big-ass scrollbars */	
+}
