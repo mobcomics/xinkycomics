@@ -16,21 +16,16 @@
 }
 
 .comiciFrameStyle {
-    width: 200px;
-    height: 300px;
     padding: 0;
     overflow: hidden;	
 }
 
 .pageThumbnailStyle {
-/*  transform: scale(5);  zoom factor - prefix if needed */
-    -ms-zoom: 0.5;
-    -ms-transform-origin: 0 0;
-    -moz-transform: scale(0.5);
-    -moz-transform-origin: 0px 50px;
-    -o-transform: scale(0.5);
-    -o-transform-origin: 0px 50px;
-    -webkit-transform: scale(0.5);
-    -webkit-transform-origin: 0 0;
   overflow: hidden;  
+}
+
+.thumbnailStyle {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

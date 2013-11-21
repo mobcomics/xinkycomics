@@ -2,6 +2,6 @@ $(window).load(function() { init(); });
 
 function init() {
 //	alert($("#actualFrame").width);
-//	$("#actualFrame").css("zoom", ".5");
-//	iframe.style.width = (origWidth * size) + 'px';
+	$("#actualFrame").css("width", $("#body").innerWidth()+"px");
+	$("#actualFrame").css("height", "1000px");
 }
