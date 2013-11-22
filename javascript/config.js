@@ -9,12 +9,12 @@ var editor = {
 
 var comics = {
 	"comicsList": [
-       	{'folderUrl': '../test/comic0/', 'dataFile': 'testComicData1.js',
+       	{'folderUrl': '/Users/thuttula/development/xinkymics/xinkycomics/test/comic0/', 'dataFile': 'testComicData1.js',
 	    	'icon': 'Icon.png', 
 	    	'title': 'Seed',
 	    	'description': 'Seed',
 	    	'panelCount': 18,
-	    	'creatorUrl': 'http://seedcomic.smackjeeves.com/comics/1596269',
+	    	'creatorUrl': 'http://seedcomic.smackjeeves.com',
 	    	'creatorNames' : 'Drobvirks',			
 	    },
 		{'folderUrl': 'http://mobcomics.com/test/saintmakers1/wrt/', 'dataFile': 'testComicData1.js',

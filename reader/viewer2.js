@@ -438,7 +438,7 @@ function track(key, context, source) {
 
 function loadScript(){
 	comicFolder = comics.comicsList[gup('comic')].folderUrl;
-    var script = document.createElement("script")
+    var script = document.createElement("script");
     script.type = "text/javascript";
     script.onload = function(){
 //		console.log("comicDataLoaded");

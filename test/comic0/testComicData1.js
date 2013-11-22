@@ -6,8 +6,6 @@ var language = {
 	"exit": "Exit",
 }
 
-http://img2.smackjeeves.com/images/uploaded/comics/b/7/b7b49d116zueI.jpg
-
 // width and height can be customize by using a pixel size instead of device default, e.g. as "height": "377"
 var myComic = {
 	"panels": [
