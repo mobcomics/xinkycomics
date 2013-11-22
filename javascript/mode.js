@@ -3,6 +3,8 @@ window.onresize = resizeIframe;
 var windowLoaded = false;
 var comicDataLoaded = false;
 var comicFolder;
+var panelPointer = [];
+var currentComic = "0";
 
 function init() {
 	if(!window.console){ window.console = {log: function(){} }; } 
@@ -18,7 +20,7 @@ function init() {
 }
 
 function continueInit() {
-	var p = myComic.panels[0];
+	var p = myComic.panels[(browserStoragePanelNumber() <= 0) ? 0 : browserStoragePanelNumber()-1];
 	$("#pageThumbnail").attr("src", p.pimage);
 	var i = new Image();
 	i.src = p.pimage;
@@ -69,4 +71,14 @@ function loadScript(){
 //    script.src = comicFolder+""+comics.comicsList[gup('comic')].dataFile;
   script.src = comicFolder+""+c.dataFile;
     document.getElementsByTagName("head")[0].appendChild(script);
+}
+
+function browserStoragePanelNumber() {
+	if (localStorage.currentPanel2 == undefined) {
+		return 1;
+	}
+	console.log(localStorage.currentPanel2);
+	panelPointer = JSON.parse(localStorage.currentPanel2);
+	if (panelPointer[currentComic] == null) return 1;
+	return panelPointer[currentComic];
 }
