@@ -13,13 +13,30 @@ function init() {
 	$("#actualFrame").css("visibility", "block");
 	var c = comics.comicsList[(gup("comic")) ? gup("comic") : 0];
 	$("#actualFrame").attr("src", c.creatorUrl);
-	$("#pageThumbnail").attr("src", "http://www.smackjeeves.com/images/uploaded/comics/f/e/fef8a053eh0fU.jpg");
 	comicFolder = c.folderUrl;
 	if (comicDataLoaded) continueInit();
 }
 
 function continueInit() {
-	alert(myComic.title);
+	var p = myComic.panels[0];
+	$("#pageThumbnail").attr("src", p.pimage);
+	var i = new Image();
+	i.src = p.pimage;
+	i.onload = function(){    
+	    imageLoaded(i, p);
+	};
+}
+
+function imageLoaded(i, p) {
+	var x = i.width/1000;
+	var scale = 130/(p.subImage.height);
+	$("#panelThumbnail").css({
+		zoom: scale,
+		width: x*p.subImage.width,
+		height: x*p.subImage.height,
+		background: "url('" + p.pimage + "')",
+		backgroundPosition: -x*p.subImage.x+"px " + -x*p.subImage.y + "px"
+	});	
 }
 
 function resizeIframe() {
