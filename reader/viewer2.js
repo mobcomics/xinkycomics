@@ -61,14 +61,7 @@ function continueInit() {
 	if (gup('comic') != "") currentComic = ""+gup('comic')+"";
 	console.log(currentComic);
 	uagent = navigator.userAgent.toLowerCase();
-/*	if (uagent.search("symbian") > -1) { // Symbian device performance are typically low
-		transitionSteps = parseInt(transitionSteps/2);  
-		transitionStepDelay = parseInt(transitionStepDelay*2); 
-		pageTransitionSteps = 1;  
-		pageTransitionStepDelay = parseInt(pageTransitionStepDelay*2); 
-		fadeImageFile = 'tranparent.png'; // 50% transparency
-		}
-*/	for (var i=0; i <= transitionSteps; i++) { // create the table
+	for (var i=0; i <= transitionSteps; i++) { // create the table
 			panelTransitionTable[i] = {'factor': 1, 'panelLeft': 0, 'panelTop': 0, 'panelWidth': 100,'panelHeight': 100, 'widthPrct': '100%'};
 	}
 	for (var j=0; j <= pageTransitionSteps; j++) { // set up fade in/out images table
@@ -239,7 +232,7 @@ function panelTransition(counter) {
 function preparePanelTransition() {	
 	// variables with postfix 1 is the current image, 2 is the next
 	savedImageSrc = myComic.panels[thisPic].pimage; // save the name if the image file
-	document.getElementById("myPicture").src = comicFolder+""+myComic.panels[thisPic].pimage; 
+	getPageImage(); //	document.getElementById("myPicture").src = comicFolder+""+myComic.panels[thisPic].pimage; 
 	var heightFactor = 1;
 	var widthFactor = 1;
 	var factor1 = factor;
@@ -278,7 +271,7 @@ function closePage(counter) {
 		document.getElementById("pictureFrame").style.width = '0px';
 		document.getElementById("pictureFrame").style.borderLeftWidth = '0px';
 		document.getElementById("pictureFrame").style.borderRightWidth = window.innerWidth+'px';
-		document.getElementById("myPicture").src = comicFolder+""+myComic.panels[thisPic].pimage; 
+		getPageImage(); //	document.getElementById("myPicture").src = comicFolder+""+myComic.panels[thisPic].pimage; 
 		document.getElementById("myPicture").style.display = 'none'; // hide image until changePage is called by displayPanel() after image.onload
 		document.getElementById("pictureFrame").style.backgroundImage = "none";
 		}
@@ -326,7 +319,7 @@ function preparePanel() { // only used when showing previous panel and changing 
 		panelHeight = myComic.panels[thisPic].height;		
 		}
 	document.getElementById("navigatorText").innerHTML = thisPic + 1 +"/" + myComic.panels.length; 
-	document.getElementById("myPicture").src = comicFolder+""+myComic.panels[thisPic].pimage; 
+	getPageImage(); //	document.getElementById("myPicture").src = comicFolder+""+myComic.panels[thisPic].pimage; 
 	if (window.innerWidth < panelWidth) widthFactor = window.innerWidth/panelWidth;
 	if (window.innerHeight < panelHeight) heightFactor = window.innerHeight/panelHeight;
 	if (heightFactor < widthFactor) {factor = heightFactor;} else {factor = widthFactor;}
@@ -392,6 +385,15 @@ function windowResize () { // is called always when orientation is changed, by u
 function hideTapGuide() {
 	document.getElementById("nextLinkImage").style.display = 'none'; 	
 }
+
+function getPageImage() {
+	var i = myComic.panels[thisPic].pimage;
+	if (i.substring(0,7) == "http://") {
+		document.getElementById("myPicture").src = i;
+	}
+	else document.getElementById("myPicture").src = comicFolder+""+i;
+//	document.getElementById("myPicture").src = comicFolder+""+myComic.panels[thisPic].pimage; 	
+};
 
 function gup( name ) {
   name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
