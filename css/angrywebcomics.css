@@ -17,11 +17,9 @@
 
 .comiciFrameStyle {
     padding: 0;
-    overflow: hidden;	
-}
-
-.pageThumbnailStyle {
-  overflow: hidden;  
+    height: 0;
+    width: 0;
+    visibility: "hidden";
 }
 
 .thumbnailStyle {

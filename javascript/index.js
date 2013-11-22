@@ -9,7 +9,7 @@ function init() {
 	if(!window.console){ window.console = {log: function(){} }; } 	
 	$.mobile.loading( 'show', {
 		text: 'loading',
-		textVisible: false,
+		textVisible: true,
 		theme: 'a',
 		html: ""
 	});

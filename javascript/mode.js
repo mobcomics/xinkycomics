@@ -1,12 +1,12 @@
 $(window).load(function() { init(); });
+window.onresize = resizeIframe;
 
 function init() {
-	window.addEventListener("orientationchange", checkOrientation, false);
-//	alert($("#actualFrame").width);
-	$("#actualFrame").css("width", $("#body").innerWidth()+"px");
 	$("#actualFrame").css("height", "1000px");
+	resizeIframe();
+	$("#actualFrame").css("visibility", "block");	
 }
 
-function checkOrientation () {
+function resizeIframe() {
 	$("#actualFrame").css("width", $("#body").innerWidth()+"px");	
 }
