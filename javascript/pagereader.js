@@ -1,5 +1,4 @@
 $(window).load(function() { init(); });
-// window.onresize = resizeIframe;
 var windowLoaded = false;
 var comicDataLoaded = false;
 var comicFolder;
@@ -20,8 +19,22 @@ function continueInit() {
 }
 
 function pageClicked() {
-	if (nextPageFirstPanel() == null) window.location = "comicslist3.html";
-	showPageOfPanel(nextPageFirstPanel());
+	var selection = "";
+	if (event) {
+	 var clickXCoord = event.x;
+	 if (clickXCoord < window.innerWidth/3) selection = "LEFT";
+	else selection = "RIGHT";
+	if (selection == "LEFT") {
+		if (previousPageFirstPanel() <= 0) window.location = "comicslist3.html";
+		showPageOfPanel(previousPageFirstPanel());
+		return false;
+	  }
+	  if (selection == "RIGHT") {
+		if (nextPageFirstPanel() == null) window.location = "comicslist3.html";
+		showPageOfPanel(nextPageFirstPanel());		  
+	  }
+	}
+	return false;
 }
 
 function showPageOfPanel(p) {
@@ -36,6 +49,15 @@ function nextPageFirstPanel() {
 		i++;
 	}
 	return (i == myComic.panels.length) ? null : i;		
+}
+
+function previousPageFirstPanel() {
+	var currentPage = myComic.panels[(browserStoragePanelNumber() <= 0) ? 0 : browserStoragePanelNumber()-1].pimage;
+	var i = (browserStoragePanelNumber() <= 0) ? 0 : browserStoragePanelNumber()-1;
+	while (i > 0 && currentPage == myComic.panels[i].pimage) {
+		i--;
+	}
+	return i;
 }
 
 function totalPages() {
