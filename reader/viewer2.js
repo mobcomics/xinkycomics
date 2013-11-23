@@ -462,6 +462,9 @@ function browserStoragePanelNumber() {
 function setBrowserStoragePanelNumber() {
 	if (localStorage.currentPanel2 != undefined) panelPointer = JSON.parse(localStorage.currentPanel2);	
 	if (thisPic != myComic.panels.length) panelPointer[currentComic] = thisPic+1;
+	console.log(currentComic);
+	console.log(panelPointer);
+	console.log(thisPic+1);	
 	localStorage.currentPanel2 = JSON.stringify(panelPointer);
 }
 

@@ -14,7 +14,7 @@ function init() {
 	resizeIframe();
 	$("#actualFrame").css("visibility", "block");
 	var c = comics.comicsList[(gup("comic")) ? gup("comic") : 0];
-	currentComic = ""+c+"";	
+	currentComic = ""+(gup("comic") ? gup("comic") : 0) +"";	
 	$("#actualFrame").attr("src", c.creatorUrl);
 	comicFolder = c.folderUrl;
 	if (comicDataLoaded) continueInit();

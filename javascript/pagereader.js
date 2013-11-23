@@ -9,11 +9,68 @@ var currentComic = "0";
 function init() {
 	if(!window.console){ window.console = {log: function(){} }; } 
 	console.log("windowLoaded");
+	if (gup('comic') != "") currentComic = ""+gup('comic')+"";	
 	windowLoaded = true;
 	if (comicDataLoaded) continueInit();
 }
 
 function continueInit() {
+	$("#pageDiv").css('text-align', 'center');
+	$("#page").attr('src',(browserStoragePanelNumber() <= 0) ? myComic.panels[0].pimage : myComic.panels[browserStoragePanelNumber()-1].pimage);
+}
+
+function pageClicked() {
+	if (nextPageFirstPanel() == null) window.location = "comicslist3.html";
+	showPageOfPanel(nextPageFirstPanel());
+}
+
+function showPageOfPanel(p) {
+	$("#page").attr('src',(p <= 0) ? myComic.panels[0].pimage : myComic.panels[p].pimage);	
+	setBrowserStoragePanelNumber(p);
+}
+
+function nextPageFirstPanel() {
+	var previousPage = myComic.panels[(browserStoragePanelNumber() <= 0) ? 0 : browserStoragePanelNumber()-1].pimage;
+	var i = (browserStoragePanelNumber() <= 0) ? 0 : browserStoragePanelNumber()-1;
+	while (i < myComic.panels.length && previousPage == myComic.panels[i].pimage) {
+		i++;
+	}
+	return (i == myComic.panels.length) ? null : i;		
+}
+
+function totalPages() {
+	var previousPage = "empty";
+	var count = 0;
+	for (var i=0;i<myComic.panels.length;i++) {
+		if (previousPage != myComic.panels[i].pimage) count++;
+		previousPage = myComic.panels[i].pimage;
+	}
+	return count;
+}
+
+function currentPage() {
+	var previousPage = "empty";
+	var count = 0;
+	var page;
+	for (var i=0;i<myComic.panels.length;i++) {
+		if (previousPage != myComic.panels[i].pimage) count++;
+		if (browserStoragePanelNumber() == i) page = count;
+		previousPage = myComic.panels[i].pimage;
+	}
+	console.log("page "+page);
+	return page;		
+}
+
+function setBrowserStoragePanelNumber(p) {
+	if (localStorage.currentPanel2 != undefined) panelPointer = JSON.parse(localStorage.currentPanel2);	
+	if (p < myComic.panels.length && p != null) {
+		panelPointer[currentComic] = p+1;
+	} else {
+		console.log("no change for local storage");
+		return;
+	}
+	localStorage.currentPanel2 = JSON.stringify(panelPointer);
+	console.log(localStorage.currentPanel2);
 }
 
 function gup( name ) {
@@ -31,6 +88,8 @@ function loadScript(){
 	if(!window.console){ window.console = {log: function(){} }; } 
 	console.log("comicLoaded");
 	var c = comics.comicsList[(gup("comic")) ? gup("comic") : 0];
+	currentComic = ""+(gup("comic") ? gup("comic") : 0) +"";
+	console.log("current comic "+currentComic);
 	comicFolder = c.folderUrl;
     var script = document.createElement("script");
     script.type = "text/javascript";
