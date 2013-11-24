@@ -14,7 +14,7 @@ var comics = {
 	    	'title': 'Seed',
 	    	'description': 'Having no family of her own, Dominique was raised by Tina\'s family among the Atrier people. She has always done her best to be helpful to others, whether by helping the Nasia family with the harvest, in Tina\'s shop with her skills as a seamstress or even just being an empathetic ear to any who would need it. Being very friendly and outgoing, Dominique is often seen speaking with complete strangers, though some would claim that this is simply because she is naive and absent minded.  Fond of birds and skilled in magic, Dominique has devised a way to fly; a skill none of her Atrier peers have been able to learn despite her assistance.',
 	    	'panelCount': 18,
-	    	'creatorUrl': 'http://www.seed-comic.com/',
+	    	'creatorUrl': 'http://seedcomic.smackjeeves.com/',
 	    	'creatorNames' : 'Julia Philip',			
 	    },
        	{'folderUrl': 'http://mobcomics.com/zines/xinky/comic1/', 'dataFile': 'testComicData1.js',
