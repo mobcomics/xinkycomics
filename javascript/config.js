@@ -4,7 +4,7 @@
 
 var editor = {
 	"description": "Welcome to Xinky Comics.",
-	"post": "We have selected you our favorite webcomics and made them readable also in a mobile optimized panel-by-panel format using our magical mobile webcomic browser technology. More comics will be added soon. Enjoy reading!",
+	"post": "We have selected you our favorite webcomics and made them readable also in a mobile optimized panel-by-panel format by using our magical mobile webcomic browser technology. More comics will be added soon. Enjoy reading!",
 };
 
 var comics = {
