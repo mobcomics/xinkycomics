@@ -10,7 +10,7 @@ function init() {
 	if(!window.console){ window.console = {log: function(){} }; } 
 	console.log("windowLoaded");
 	windowLoaded = true;
-//	$("#actualFrame").css("height", "1800px");
+	$("#actualFrame").css("height", "1800px");
 	$("#scroller").css("height", "1800px");
 	resizeIframe();
 	var c = comics.comicsList[(gup("comic")) ? gup("comic") : 0];
