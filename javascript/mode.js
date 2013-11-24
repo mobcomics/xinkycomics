@@ -31,6 +31,7 @@ function continueInit() {
 	};
 	$("#actualFrame").attr("src", c.creatorUrl);
 	$("#actualFrame").css("visibility", "block");
+	$('#scroller').css({'overflow' : 'auto', '-webkit-overflow-scrolling' : 'touch'});	
 }
 
 function imageLoaded(i, p) {
