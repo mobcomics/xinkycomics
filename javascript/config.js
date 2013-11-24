@@ -3,7 +3,7 @@
  */
 
 var editor = {
-	"description": "Welcome to Angry Webcomics! Zine. I have selected you the most angry comics of all webcomics.",
+	"description": "Welcome to Xinky Comics. I have selected you the most angry comics of all webcomics.",
 	"post": "More comics will be added soon. To start, I do recommend you to check out Wittgenstein Ant Colony to read about those small creatures with big adventures. Some more panels added this week. Enjoy reading!",
 };
 
