@@ -45,10 +45,10 @@ function showComics2() {
 function updatePopup(i) {
 	var c = comics.comicsList[i];
 	$("#title").html(c.title);
-	$("#creatorUrl").attr("href", c.creatorUrl);
+	$("#creatorUrl").attr("href", "mode.html?comic="+i);
 	$("#creatorUrl").html("By "+c.creatorNames+" (click to view Website)");	
 	$("#description").html(c.description);	
-	$("#read").attr("href", "reader/viewer.html?comic="+i);
+	$("#read").attr("href", "mode.html?comic="+i);
 	$('#comicinfo').popup('refresh');		
 }
 

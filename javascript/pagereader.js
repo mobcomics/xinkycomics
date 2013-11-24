@@ -16,6 +16,11 @@ function init() {
 function continueInit() {
 	$("#pageDiv").css('text-align', 'center');
 	$("#page").attr('src',(browserStoragePanelNumber() <= 0) ? myComic.panels[0].pimage : myComic.panels[browserStoragePanelNumber()-1].pimage);
+	$("#navigatorText").html(pageString());
+}
+
+function pageString() {
+	return currentPage()+"/"+totalPages();
 }
 
 function pageClicked() {
@@ -40,6 +45,7 @@ function pageClicked() {
 function showPageOfPanel(p) {
 	$("#page").attr('src',(p <= 0) ? myComic.panels[0].pimage : myComic.panels[p].pimage);	
 	setBrowserStoragePanelNumber(p);
+	$("#navigatorText").html(pageString());
 }
 
 function nextPageFirstPanel() {

@@ -20,7 +20,7 @@ var comics = {
        	{'folderUrl': '/Users/thuttula/development/xinkymics/xinkycomics/test/comic1/', 'dataFile': 'testComicData1.js',
 	    	'icon': 'Icon.png', 
 	    	'title': 'Two Kinds',
-	    	'description': 'Two Kinds',
+	    	'description': 'After losing his memory to a mysterious battle, Trace Legacy, a former leader for an organization of mages called the Templar, finds himself in the company of Flora, a girl of strange, tiger-like qualities. As Trace gradually begins to re-learn what he once knew, he soon discovers that Flora belongs to a race of people who are enemies of his kind. As friendship confects with racial differences, Trace and Flora find themselves in a situation more critical than either of them can imagine.',
 	    	'panelCount': 23,
 	    	'creatorUrl': 'http://twokinds.keenspot.com/',
 	    	'creatorNames' : 'Tom Fischbach',			

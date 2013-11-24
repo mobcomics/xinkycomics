@@ -27,3 +27,14 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.navigatorTextStyle {
+	text-align: right;
+	font-size: 14px;
+	padding: 5px;
+	z-index: 4;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	color: #666;
+}
