@@ -10,7 +10,8 @@ function init() {
 	if(!window.console){ window.console = {log: function(){} }; } 
 	console.log("windowLoaded");
 	windowLoaded = true;
-	$("#actualFrame").css("height", "1800px");
+//	$("#actualFrame").css("height", "1800px");
+	$("#scroller").css("height", "1800px");
 	resizeIframe();
 	var c = comics.comicsList[(gup("comic")) ? gup("comic") : 0];
 	currentComic = ""+(gup("comic") ? gup("comic") : 0) +"";	
@@ -30,7 +31,7 @@ function continueInit() {
 	    imageLoaded(i, p);
 	};
 	$("#actualFrame").attr("src", c.creatorUrl);
-	$("#actualFrame").css("visibility", "block");
+//	$("#actualFrame").css("visibility", "block");
 	$('#scroller').css({'overflow' : 'auto', '-webkit-overflow-scrolling' : 'touch'});	
 }
 
@@ -47,6 +48,7 @@ function imageLoaded(i, p) {
 }
 
 function resizeIframe() {
+	$("#scroller").css("width", $("#body").innerWidth()+"px");	
 	$("#actualFrame").css("width", $("#body").innerWidth()+"px");	
 }
 
