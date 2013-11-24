@@ -15,12 +15,14 @@ function init() {
 	$("#actualFrame").css("visibility", "block");
 	var c = comics.comicsList[(gup("comic")) ? gup("comic") : 0];
 	currentComic = ""+(gup("comic") ? gup("comic") : 0) +"";	
+	$("#panelLink").attr("href", "reader/viewer.html?comic="+currentComic);		
+	$("#pageLink").attr("href", "pagereader.html?comic="+currentComic);		
 	$("#actualFrame").attr("src", c.creatorUrl);
 	comicFolder = c.folderUrl;
 	if (comicDataLoaded) continueInit();
 }
 
-function continueInit() {
+function continueInit() {	
 	var p = myComic.panels[(browserStoragePanelNumber() <= 0) ? 0 : browserStoragePanelNumber()-1];
 	$("#pageThumbnail").attr("src", p.pimage);
 	var i = new Image();

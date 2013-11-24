@@ -29,7 +29,7 @@ function showComics2() {
 	for (var i=0;i<comics.comicsList.length;i++) {
 		var c = comics.comicsList[i];
 		var panelsLeft = c.panelCount-readPanels(i);
-		cList+="<li><a rel='external' href='reader/viewer.html?comic="+i+"'><img src='"+c.folderUrl+c.icon+"'><h2>"+c.title+"<span class='ui-li-count'>"+panelsLeft+"</span></h2><p>"+c.description+"</p></a><a id='info"+i+"' href='#comicinfo' data-rel='popup' data-position-to='window' data-icon='info'>Comic Info</a></li>";
+		cList+="<li><a rel='external' href='mode.html?comic="+i+"'><img src='"+c.folderUrl+c.icon+"'><h2>"+c.title+"<span class='ui-li-count'>"+panelsLeft+"</span></h2><p>"+c.description+"</p></a><a id='info"+i+"' href='#comicinfo' data-rel='popup' data-position-to='window' data-icon='info'>Comic Info</a></li>";
 	//  took the transition out: data-transition='pop'	
 	}
 	$("#comics2").html(cList);
