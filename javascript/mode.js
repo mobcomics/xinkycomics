@@ -12,7 +12,6 @@ function init() {
 	windowLoaded = true;
 	$("#actualFrame").css("height", "1800px");
 	resizeIframe();
-	$("#actualFrame").css("visibility", "block");
 	var c = comics.comicsList[(gup("comic")) ? gup("comic") : 0];
 	currentComic = ""+(gup("comic") ? gup("comic") : 0) +"";	
 	$("#panelLink").attr("href", "reader/viewer.html?comic="+currentComic);		
@@ -31,6 +30,7 @@ function continueInit() {
 	    imageLoaded(i, p);
 	};
 	$("#actualFrame").attr("src", c.creatorUrl);
+	$("#actualFrame").css("visibility", "block");
 }
 
 function imageLoaded(i, p) {
