@@ -17,10 +17,10 @@
 
 .comiciFrameStyle {
     padding: 0;
-    height: 0;
+/*    height: 0;
     width: 0;
-/*    visibility: hidden; */
-    overflow: auto;
+    visibility: hidden; */
+    overflow: scroll;
 }
 
 .thumbnailStyle {
