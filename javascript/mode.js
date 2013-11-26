@@ -10,8 +10,8 @@ function init() {
 	if(!window.console){ window.console = {log: function(){} }; } 
 	console.log("windowLoaded");
 	windowLoaded = true;
-	$("#actualFrame").css("height", "2000px");
-	$("#scroller").css("height", "2000px");
+	$("#actualFrame").css("height", "3000px");
+	$("#scroller").css("height", "3000px");
 	resizeIframe();
 	var c = comics.comicsList[(gup("comic")) ? gup("comic") : 0];
 	currentComic = ""+(gup("comic") ? gup("comic") : 0) +"";	
@@ -37,7 +37,9 @@ function continueInit() {
 
 function imageLoaded(i, p) {
 	var x = i.width/1000;
-	var scale = 130/(p.subImage.height);
+	console.log("x "+x);
+	var scale = 80/(x*p.subImage.height);
+//	console.log("image width "+i.width)
 	$("#panelThumbnail").css({
 		zoom: scale,
 		width: x*p.subImage.width,
