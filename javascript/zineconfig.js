@@ -1,0 +1,5 @@
+/**
+ * Zine config
+ */
+
+var zineConfigUrl = "";
