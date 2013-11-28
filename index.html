@@ -19,19 +19,12 @@
   })(window,document,'script','javascript/analytics.js','ga');
 
   <!--   ga('create', 'UA-46053690-1', 'mobcomics.com'); -->
-  
-  try{
-	  if(typeof(device) !== undefined) {
-		  alert(device.uuid);
+
 	  	ga('create', 'UA-46053690-1', {
 			  'storage': 'none',
-		  	'clientId':device.uuid
+		  	'clientId':12345
 		  	});
 	 	 ga('send', 'pageview');	  
-	  	}
-	  }catch(e){
-	    alert('device is undefined'); 
-	}
 
 </script>
 <!-- End Google Analytics -->
