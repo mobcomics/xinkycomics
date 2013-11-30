@@ -30,12 +30,10 @@ function continueInit() {
 	i.onload = function(){    
 	    imageLoaded(i, p);
 	};
-	$("#actualFrame").attr("src", c.creatorUrl);
-//	$("#actualFrame").css("visibility", "block");
-	$('#scroller').css({'overflow' : 'scroll', '-webkit-overflow-scrolling' : 'touch'});	
 }
 
 function imageLoaded(i, p) {
+	var c = comics.comicsList[(gup("comic")) ? gup("comic") : 0];	
 	var x = i.width/1000;
 	console.log("x "+x);
 	var scale = 80/(x*p.subImage.height);
@@ -47,6 +45,8 @@ function imageLoaded(i, p) {
 		background: "url('" + p.pimage + "')",
 		backgroundPosition: -x*p.subImage.x+"px " + -x*p.subImage.y + "px"
 	});	
+	$("#actualFrame").attr("src", c.creatorUrl); // download the iframe page last
+	$('#scroller').css({'overflow' : 'scroll', '-webkit-overflow-scrolling' : 'touch'});	
 }
 
 function resizeIframe() {
