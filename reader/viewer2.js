@@ -121,6 +121,7 @@ function processShortcut(panelNumber) {
 
 function processPrevious() {
 	thisPic--;
+	gaTrack("READ");	
 //	sessionStorage.currentPanel = thisPic;
 	setBrowserStoragePanelNumber();
 	if (thisPic == -1) {
@@ -187,8 +188,9 @@ function processKeypress() {
 }
 
 function processNext() {
-//	track('AppID'+myComic.appID+'_session'+sessionStorage.sessionID, thisPic.toString(), "viewer.js");
 	thisPic++;	
+	gaTrack("READ");
+//	track('AppID'+myComic.appID+'_session'+sessionStorage.sessionID, thisPic.toString(), "viewer.js");
 	setBrowserStoragePanelNumber(); 
 	for (var j=0; j <= pageTransitionSteps; j++) { // hide fade out images
 		fadeImages[j].style.display = 'none';
@@ -434,6 +436,13 @@ function track(key, context, source) {
       }
     );
 	*/
+}
+
+function gaTrack(mode) {	
+	if (mode == "READ") {
+		console.log("READ "+thisPic);
+		$('#track').attr('src', 'http://mobcomics.com/zines/analytics/track.html?category=read&action=comic'+currentComic+'&label=panel'+thisPic);
+	}
 }
 
 function loadScript(){

@@ -24,6 +24,7 @@ function pageString() {
 }
 
 function pageClicked() {
+	gaTrack("READ");	
 	var selection = "";
 	if (event) {
 	 var clickXCoord = event.x;
@@ -137,4 +138,11 @@ function browserStoragePanelNumber() {
 	panelPointer = JSON.parse(localStorage.currentPanel2);
 	if (panelPointer[currentComic] == null) return 1;
 	return panelPointer[currentComic];
+}
+
+function gaTrack(mode) {	
+	if (mode == "READ") {
+		console.log("READ page"+currentPage());
+		$('#track').attr('src', 'http://mobcomics.com/zines/analytics/track.html?category=read&action=comic'+currentComic+'&label=page'+currentPage());
+	}
 }
