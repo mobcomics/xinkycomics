@@ -441,7 +441,7 @@ function track(key, context, source) {
 function gaTrack(mode) {	
 	if (mode == "READ") {
 		console.log("READ "+thisPic);
-		$('#track').attr('src', 'http://mobcomics.com/zines/analytics/track.html?category=read&action=comic'+currentComic+'&label=panel'+thisPic);
+//		$('#track').attr('src', 'http://mobcomics.com/zines/analytics/track.html?category=read&action=comic'+currentComic+'&label=panel'+thisPic);
 	}
 }
 
