@@ -19,13 +19,19 @@ function init() {
 
 function continueInit(i) {
 	console.log(i);
-	$.mobile.loading( 'hide');
+	$.mobile.loading('hide');
 	document.getElementById("description").innerHTML = editor.description;
 	document.getElementById("post").innerHTML = editor.post;
 	$("#editor").html("Stahlhandske");
+	window.setTimeout(gaTrack, 2000);
 //	jQuery( window ).on( "swipe", function( event ) {
 //		$("#editor").html("zipe");								   
 //	});
+}
+
+function gaTrack() {
+	console.log('timeout');
+	$("#track").attr('src', "http://mobcomics.com/zines/analytics/track.html?category=view&action=view&label=index");
 }
 
 
