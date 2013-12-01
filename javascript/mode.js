@@ -22,7 +22,6 @@ function init() {
 }
 
 function continueInit() {	
-	var c = comics.comicsList[(gup("comic")) ? gup("comic") : 0];
 	var p = myComic.panels[(browserStoragePanelNumber() <= 0) ? 0 : browserStoragePanelNumber()-1];
 	$("#pageThumbnail").attr("src", p.pimage);
 	var i = new Image();
@@ -34,7 +33,6 @@ function continueInit() {
 }
 
 function imageLoaded(i, p) {
-	var c = comics.comicsList[(gup("comic")) ? gup("comic") : 0];	
 	var x = i.width/1000;
 	console.log("x "+x);
 	var scale = 80/(x*p.subImage.height);
@@ -46,8 +44,13 @@ function imageLoaded(i, p) {
 		background: "url('" + p.pimage + "')",
 		backgroundPosition: -x*p.subImage.x+"px " + -x*p.subImage.y + "px"
 	});	
-	$("#actualFrame").attr("src", c.creatorUrl); // download the iframe page last
-	$('#scroller').css({'overflow' : 'scroll', '-webkit-overflow-scrolling' : 'touch'});	
+	window.setTimeout(loadIframe, 100);  // download the iframe page last
+}
+
+function loadIframe() {
+	var c = comics.comicsList[(gup("comic")) ? gup("comic") : 0];	
+	$("#actualFrame").attr("src", c.creatorUrl);
+	$('#scroller').css({'overflow' : 'scroll', '-webkit-overflow-scrolling' : 'touch'});		
 }
 
 function resizeIframe() {
