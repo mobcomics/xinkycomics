@@ -17,6 +17,7 @@ function continueInit() {
 	$("#pageDiv").css('text-align', 'center');
 	$("#page").attr('src',(browserStoragePanelNumber() <= 0) ? myComic.panels[0].pimage : myComic.panels[browserStoragePanelNumber()-1].pimage);
 	$("#navigatorText").html(pageString());
+	window.setTimeout(gaTrack, 500, ["VIEW"]);
 }
 
 function pageString() {
@@ -148,5 +149,14 @@ function gaTrack(mode) {
 //		$('#track').attr('src', 'http://mobcomics.com/zines/analytics/track.html?category=read&action=comic'+currentComic+'&label=page'+currentPage());
 //		('#track').empty().load('http://mobcomics.com/zines/analytics/track.html?category=read&action=comic'+currentComic+'&label=page'+currentPage());
 		$('#track').get(0).contentWindow.location.replace('http://mobcomics.com/zines/analytics/track.html?category=read&action=comic'+currentComic+'&label=page'+currentPage());
+		return;
 	}
+	if (mode == "VIEW") {
+		console.log("VIEW");
+		$('#track').get(0).contentWindow.location.replace('http://mobcomics.com/zines/analytics/track.html?category=view&action=view&label=pagereader');
+		return;
+	}	
 }
+
+
+

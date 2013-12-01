@@ -21,6 +21,7 @@ function init() {
 function continueInit() {
 	$.mobile.loading( 'hide');
 	showComics2();
+	window.setTimeout(gaTrack, 500);
 }
 
 
@@ -83,3 +84,9 @@ function readPanels(currentComic) {
 	if (panelPointer[currentComic] == null) return 0;
 	return panelPointer[currentComic];
 }
+
+function gaTrack() {
+	console.log('timeout');
+	$("#track").attr('src', "http://mobcomics.com/zines/analytics/track.html?category=view&action=view&label=comicslist");
+}
+

@@ -30,6 +30,7 @@ function continueInit() {
 	i.onload = function(){    
 	    imageLoaded(i, p);
 	};
+	window.setTimeout(gaTrack, 500);
 }
 
 function imageLoaded(i, p) {
@@ -90,4 +91,9 @@ function browserStoragePanelNumber() {
 	panelPointer = JSON.parse(localStorage.currentPanel2);
 	if (panelPointer[currentComic] == null) return 1;
 	return panelPointer[currentComic];
+}
+
+function gaTrack() {
+	console.log('timeout');
+	$("#track").attr('src', "http://mobcomics.com/zines/analytics/track.html?category=view&action=view&label=mode");
 }

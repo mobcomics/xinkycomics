@@ -95,7 +95,8 @@ function continueInit() {
 		document.getElementById("playIndicator").style.display = 'block'; // makes image visible
 		setTimeout(callAutoPlay, autoPlayDelay);
 	}
-//	jQuery( window ).on( "swipe", function( event ) {
+	window.setTimeout(gaTrack, 500, ["VIEW"]);	
+//	jQuery( window ).on( "swipe", function( event ) { // does not work
 //		console.log("swipe");									   
 //		if (autoPlay) transitionEventCounter++;
 //		processNext();								   				   
@@ -441,9 +442,13 @@ function track(key, context, source) {
 function gaTrack(mode) {	
 	if (mode == "READ") {
 		console.log("READ "+thisPic);
-//		$('#track').attr('src', 'http://mobcomics.com/zines/analytics/track.html?category=read&action=comic'+currentComic+'&label=panel'+thisPic);
 		$('#track').get(0).contentWindow.location.replace('http://mobcomics.com/zines/analytics/track.html?category=read&action=comic'+currentComic+'&label=panel'+thisPic);
 	}
+	if (mode == "VIEW") {
+		console.log("VIEW");
+		$('#track').get(0).contentWindow.location.replace('http://mobcomics.com/zines/analytics/track.html?category=view&action=view&label=panelreader');
+		return;
+	}	
 }
 
 function loadScript(){

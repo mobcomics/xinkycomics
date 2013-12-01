@@ -23,7 +23,7 @@ function continueInit(i) {
 	document.getElementById("description").innerHTML = editor.description;
 	document.getElementById("post").innerHTML = editor.post;
 	$("#editor").html("Stahlhandske");
-	window.setTimeout(gaTrack, 2000);
+	window.setTimeout(gaTrack, 500);
 //	jQuery( window ).on( "swipe", function( event ) {
 //		$("#editor").html("zipe");								   
 //	});
