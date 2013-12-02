@@ -94,3 +94,7 @@ function showCredits() {
 	$("#creditsLine").html("You have <span style='font-weight:bold;'>"+readCredits()+" panel credits</span> left");	
 }
 
+function clickBuy() {
+	addCredits(50);
+	showCredits();
+}
