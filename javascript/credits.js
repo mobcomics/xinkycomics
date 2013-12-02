@@ -7,7 +7,6 @@ function addCredits(c) {
 	if (localStorage.dits != undefined) credits = JSON.parse(localStorage.dits);	
 	localStorage.dits = JSON.stringify(credits+c);
 	console.log(localStorage.dits);
-	showCredits();
 }
 
 function readCredits() {
@@ -16,3 +15,9 @@ function readCredits() {
 	return credits;
 }
 
+function useCredits(c) {
+	var credits = 0;
+	if (localStorage.dits != undefined) credits = JSON.parse(localStorage.dits);	
+	localStorage.dits = JSON.stringify(credits-c);
+	console.log("credits: "+localStorage.dits);
+}

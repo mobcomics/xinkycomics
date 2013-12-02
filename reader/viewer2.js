@@ -189,7 +189,8 @@ function processKeypress() {
 }
 
 function processNext() {
-	thisPic++;	
+	thisPic++;
+	useCredits(1);
 	gaTrack("READ");
 //	track('AppID'+myComic.appID+'_session'+sessionStorage.sessionID, thisPic.toString(), "viewer.js");
 	setBrowserStoragePanelNumber(); 

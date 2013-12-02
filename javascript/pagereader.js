@@ -25,7 +25,7 @@ function pageString() {
 }
 
 function pageClicked() {
-	gaTrack("READ");	
+	gaTrack("READ");
 	var selection = "";
 	if (event) {
 	 var clickXCoord = event.x;
@@ -38,7 +38,12 @@ function pageClicked() {
 	  }
 	  if (selection == "RIGHT") {
 		if (nextPageFirstPanel() == null) window.location = "comicslist3.html";
-		showPageOfPanel(nextPageFirstPanel());		  
+		else {
+			console.log("nextPageFirstPanel() :"+nextPageFirstPanel());
+			console.log("browserStoragePanelNumber() :"+browserStoragePanelNumber());
+			useCredits(nextPageFirstPanel()-browserStoragePanelNumber());
+			showPageOfPanel(nextPageFirstPanel());		
+		}
 	  }
 	}
 	return false;
