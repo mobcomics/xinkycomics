@@ -19,11 +19,11 @@ function init() {
 };
 
 function continueInit() {
-	$.mobile.loading( 'hide');
+	$.mobile.loading('hide');
 	showComics2();
 	window.setTimeout(gaTrack, 500);
+	showCredits();
 }
-
 
 function showComics2() {
 	var cList = "";
@@ -89,4 +89,23 @@ function gaTrack() {
 	console.log('timeout');
 	$("#track").attr('src', "http://mobcomics.com/zines/analytics/track.html?category=view&action=view&label=comicslist");
 }
+
+function addCredits(c) {
+	var credits = 0;
+	if (localStorage.dits != undefined) credits = JSON.parse(localStorage.dits);	
+	localStorage.dits = JSON.stringify(credits+c);
+	console.log(localStorage.dits);
+	showCredits();
+}
+
+function readCredits() {
+	var credits = 0;
+	if (localStorage.dits != undefined) credits = JSON.parse(localStorage.dits);	
+	return credits;
+}
+
+function showCredits() {
+	$("#creditsLine").html("You have <span style='font-weight:bold;'>"+readCredits()+" panel credits</span> left");	
+}
+
 
