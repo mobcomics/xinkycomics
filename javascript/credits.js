@@ -16,6 +16,3 @@ function readCredits() {
 	return credits;
 }
 
-function showCredits() {
-	$("#creditsLine").html("You have <span style='font-weight:bold;'>"+readCredits()+" panel credits</span> left");	
-}
