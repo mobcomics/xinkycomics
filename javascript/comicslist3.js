@@ -21,7 +21,7 @@ function init() {
 function continueInit() {
 	$.mobile.loading('hide');
 	showComics2();
-	window.setTimeout(comicsListDailyCreditsCheck(), 1300);
+	comicsListDailyCreditsCheck();
 	window.setTimeout(gaTrack, 500);
 	showCredits();
 }
@@ -100,10 +100,13 @@ function clickBuy() {
 	showCredits();
 }
 
+/*
 function closeDailyCreditsPopup() {
 //	window.location = "comicslist3.html";
 	$('#dailyCredits').popup('close');	
 }
+	<a href="#" onClick="closeDailyCreditsPopup()" data-theme="e" data-role="button" data-inline="true" data-mini="true">Thanks</a>
+*/
 
 function comicsListDailyCreditsCheck() {
 	var dailyCreditsGiven = checkAndAddDailyCredits();
