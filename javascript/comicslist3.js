@@ -101,8 +101,8 @@ function clickBuy() {
 }
 
 function closeDailyCreditsPopup() {
-	window.location = "comicslist3.html";
-//	$('#dailyCredits').popup('close');	
+//	window.location = "comicslist3.html";
+	$('#dailyCredits').popup('close');	
 }
 
 function comicsListDailyCreditsCheck() {
