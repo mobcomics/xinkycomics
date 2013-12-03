@@ -46,8 +46,15 @@
 <div data-role="popup" id="buyCredits" data-theme="d" data-overlay-theme="b" class="ui-content" padding-bottom:2em;">
 	<div>
 	    <h3>50 FREE CREDITS!</h3>
-		<p>The Sex Comics app is still in beta, and therefore as an early user we would like to give you 50 free credits. Have fun reading the comics!</p>
-   		<a href="#" data-role="button" data-rel="back" data-inline="true" data-mini="true">Close</a>
+		<p>The Sex Comics app is still in beta, and therefore as an early user we would like to give you additional 50 free credits every day. Have fun reading the comics!</p>
+   		<a href="#" data-role="button" data-rel="back" data-inline="true" data-mini="true">Thanks</a>
+    </div>
+</div>
+<div data-role="popup" id="dailyCredits" data-theme="d" data-overlay-theme="b" class="ui-content" padding-bottom:2em;">
+	<div>
+	    <h3>DAILY FREE CREDITS!</h3>
+		<p id="dailyCreditsText"></p>
+   		<a href="#" onClick="closeDailyCreditsPopup()" data-role="button" data-inline="true" data-mini="true">Thanks</a>
     </div>
 </div>
 <iframe id="track" style="visibility: hidden" src=""></iframe>   

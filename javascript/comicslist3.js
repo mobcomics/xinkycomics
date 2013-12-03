@@ -21,6 +21,7 @@ function init() {
 function continueInit() {
 	$.mobile.loading('hide');
 	showComics2();
+	window.setTimeout(comicsListDailyCreditsCheck(), 1300);
 	window.setTimeout(gaTrack, 500);
 	showCredits();
 }
@@ -98,3 +99,18 @@ function clickBuy() {
 	addCredits(50);
 	showCredits();
 }
+
+function closeDailyCreditsPopup() {
+	window.location = "comicslist3.html";
+//	$('#dailyCredits').popup('close');	
+}
+
+function comicsListDailyCreditsCheck() {
+	var dailyCreditsGiven = checkAndAddDailyCredits();
+	if (dailyCreditsGiven) {
+		$("#dailyCreditsText").html("Each day you use the Sex Comics app, we are happy to give you "+dailyCreditsGiven+" free credits. Have fun reading the comics!");
+		$("#dailyCredits").popup("open");
+	}
+}
+
+// onClick="closeDailyCreditsPopup();"
