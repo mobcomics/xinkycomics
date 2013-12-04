@@ -12,6 +12,7 @@
 <script type="text/javascript">loadScript();</script>
 </head>
 <body>
+<div data-role="page" id="page1">
 <div data-role="header">
     <span class="ui-title">Comics List</span>
     <a href="index.html" rel="external" data-icon="home" class="ui-btn-left">Intro</a>
@@ -19,7 +20,8 @@
 </div>
 <div data-role="content" data-theme="e">
 	<span id="creditsLine"></span>
-	<span style="float:right"><a  onClick="clickBuy()" href="#buyCredits" data-role="button" data-rel="popup" data-inline="true" data-mini="true">Buy Credits</a></span>
+	<span style="float:right"><a  onClick="clickBuy()" href="#buyCredits" data-role="button" data-rel="dialog" data-inline="true" data-mini="true">Buy Credits</a></span>
+	<iframe id="track" style="visibility: hidden; height: 0px;" src=""></iframe>  
 </div>
 <ul id="comics2" data-role="listview" data-inset="true">
 </ul> 
@@ -43,19 +45,21 @@
     <a id="ok" href="#" data-role="button" data-rel="back" data-inline="true" data-mini="true">OK</a>
     </div>
 </div>
-<div data-role="popup" id="buyCredits" data-theme="e" data-overlay-theme="b" class="ui-content" padding-bottom:2em;">
-	<div>
+</div> 
+<div data-role="page" id="buyCredits" data-theme="e" data-overlay-theme="b" class="ui-content" padding-bottom:2em;">
+	<div data-role="content">
 	    <h3>50 FREE CREDITS!</h3>
 		<p>The Sex Comics app is still in beta, and therefore as an early user we would like to give you additional 50 free credits every day. Have fun reading the comics!</p>
+    	<a href="#" data-role="button" data-rel="back" data-inline="true" data-mini="true">Thanks</a>
     </div>
 </div>
-<div data-role="popup" id="dailyCredits" data-theme="e" data-overlay-theme="b" class="ui-content" padding-bottom:2em;">
-	<div>
+<div data-role="page" id="dailyCredits" data-theme="e" data-overlay-theme="b" class="ui-content" padding-bottom:2em;">
+	<div data-role="content">
 	    <h3>DAILY FREE CREDITS!</h3>
 		<p id="dailyCreditsText"></p>
+    	<a href="#page1" data-role="button" data-inline="true" data-mini="true">Thanks</a>
     </div>
 </div>
-<iframe id="track" style="visibility: hidden" src=""></iframe>   
 </body></html>
 
 
