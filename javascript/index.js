@@ -48,6 +48,4 @@ function loadScript(){
     document.getElementsByTagName("head")[0].appendChild(script);
 }
 
-/* <script type="text/javascript" src="http://mobcomics.com/zines/angry/config.js">
- </script>
- */
+
