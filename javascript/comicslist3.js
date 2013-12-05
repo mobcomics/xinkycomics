@@ -22,8 +22,8 @@ function continueInit() {
 	$.mobile.loading('hide');
 	showComics2();
 //	comicsListDailyCreditsCheck();
-	window.setTimeout(comicsListDailyCreditsCheck, 1500);
-	window.setTimeout(gaTrack, 500);
+	window.setTimeout(comicsListDailyCreditsCheck, 500);
+	window.setTimeout(gaTrack, 1000, ["VIEW"]);
 	showCredits();
 }
 
@@ -87,9 +87,29 @@ function readPanels(currentComic) {
 	return panelPointer[currentComic];
 }
 
-function gaTrack() {
-	console.log('timeout');
-	$("#track").attr('src', "http://mobcomics.com/zines/analytics/track.html?category=view&action=view&label=comicslist");
+function gaTrack(mode) {	
+	if (mode == "READ") {
+		console.log("READ page"+currentPage());
+//		$.get( "http://mobcomics.com/zines/analytics/track.html?category=read&action=comic"+currentComic+"&label=page"+currentPage() );
+//		$.get( "http://mobcomics.com/zines/analytics/track.html", { category: "John", action: "2pm", label: "test" });			
+//		$('#track').attr('src', 'http://mobcomics.com/zines/analytics/track.html?category=read&action=comic'+currentComic+'&label=page'+currentPage());
+//		('#track').empty().load('http://mobcomics.com/zines/analytics/track.html?category=read&action=comic'+currentComic+'&label=page'+currentPage());
+		$('#track').get(0).contentWindow.location.replace('http://mobcomics.com/zines/analytics/track.html?category=read&action=comic'+currentComic+'&label=page'+currentPage());
+		return;
+	}
+	if (mode == "VIEW") {
+		console.log("VIEW");
+		$('#track').get(0).contentWindow.location.replace('http://mobcomics.com/zines/analytics/track.html?category=view&action=view&label=comicslist');
+		return;
+	}	
+	if (mode == "PAYWALL") {
+		console.log("PAYWALL");
+		$('#track').get(0).contentWindow.location.replace('http://mobcomics.com/zines/analytics/track.html?category=credits&action=click&label=paywall');
+	}	
+	if (mode == "USED_ALL_CREDITS") {
+		console.log("PAYWALL");
+		$('#track').get(0).contentWindow.location.replace('http://mobcomics.com/zines/analytics/track.html?category=credits&action=used&label=all');
+	}	
 }
 
 function showCredits() {
@@ -99,6 +119,7 @@ function showCredits() {
 function clickBuy() {
 	addCredits(50);
 	showCredits();
+	gaTrack("PAYWALL");
 }
 
 function comicsListDailyCreditsCheck() {
@@ -109,6 +130,7 @@ function comicsListDailyCreditsCheck() {
 		showCredits();
 		return;
 	} else if (readCredits() <= 0) {
+		gaTrack("USED_ALL_CREDITS");
 		$.mobile.changePage( "#noCredits", { role: "dialog" } );
 	}			   
 }
