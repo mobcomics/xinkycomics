@@ -18,8 +18,14 @@ function readCredits() {
 function useCredits(c) {
 	var credits = 0;
 	if (localStorage.dits != undefined) credits = JSON.parse(localStorage.dits);	
-	localStorage.dits = JSON.stringify(credits-c);
+	if ((credits-c) < 0) {
+		localStorage.dits = JSON.stringify(0);	
+		console.log("credits out");
+		return 0;
+	}
+	localStorage.dits = JSON.stringify(credits-c);	
 	console.log("credits: "+localStorage.dits);
+	return localStorage.dits;
 }
 
 function checkAndAddDailyCredits() {

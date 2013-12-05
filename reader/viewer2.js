@@ -190,7 +190,9 @@ function processKeypress() {
 
 function processNext() {
 	thisPic++;
-	useCredits(1);
+	if (useCredits(1) <= 0) {
+		window.location = "../comicslist3.html"; 
+	}
 	gaTrack("READ");
 //	track('AppID'+myComic.appID+'_session'+sessionStorage.sessionID, thisPic.toString(), "viewer.js");
 	setBrowserStoragePanelNumber(); 

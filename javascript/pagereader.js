@@ -41,7 +41,9 @@ function pageClicked() {
 		else {
 			console.log("nextPageFirstPanel() :"+nextPageFirstPanel());
 			console.log("browserStoragePanelNumber() :"+browserStoragePanelNumber());
-			useCredits(nextPageFirstPanel()-browserStoragePanelNumber());
+			if (useCredits(nextPageFirstPanel()-browserStoragePanelNumber()) <= 0) {
+				window.location = "comicslist3.html";
+			}
 			showPageOfPanel(nextPageFirstPanel());		
 		}
 	  }
@@ -86,7 +88,7 @@ function totalPages() {
 function currentPage() {
 	var previousPage = "empty";
 	var count = 0;
-	var page;
+	var page = 0;
 	for (var i=0;i<myComic.panels.length;i++) {
 		if (previousPage != myComic.panels[i].pimage) count++;
 		if (browserStoragePanelNumber() == i) page = count;
