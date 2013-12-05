@@ -6,10 +6,11 @@ var comicFolder;
 var panelPointer = [];
 var currentComic = "0";
 
-function init() {
+function init() {	
 	if(!window.console){ window.console = {log: function(){} }; } 
 	console.log("windowLoaded");
 	windowLoaded = true;
+	if (readCredits() <= 0) window.location = "comicslist3.html";
 	$("#actualFrame").css("height", "3000px");
 	$("#scroller").css("height", "3000px");
 	resizeIframe();

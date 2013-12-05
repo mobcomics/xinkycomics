@@ -42,8 +42,8 @@ function showComics2() {
 			var data = event.data;
 			updatePopup(data.row);
 		});
-		}
 	}
+}
 	
 function updatePopup(i) {
 	var c = comics.comicsList[i];
@@ -107,6 +107,9 @@ function comicsListDailyCreditsCheck() {
 		$("#dailyCreditsText").html("Each day you use the Sex Comics app, we are happy to give you "+dailyCreditsGiven+" free credits. Have fun reading the comics!");
 		$.mobile.changePage( "#dailyCredits", { role: "dialog" } );
 		showCredits();
+		return;
+	} else if (readCredits() <= 0) {
+		$.mobile.changePage( "#noCredits", { role: "dialog" } );
 	}			   
 }
 
