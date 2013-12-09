@@ -12,7 +12,7 @@
 <script type="text/javascript">loadScript();</script>
 </head>
 <body>
-<div data-role="page" id="page1">
+<div data-role="page" id="comicsList">
 <div data-role="header">
     <span class="ui-title">Comics List</span>
     <a href="index.html" rel="external" data-icon="home" class="ui-btn-left">Intro</a>
@@ -20,7 +20,7 @@
 </div>
 <div data-role="content" data-theme="e">
 	<span id="creditsLine"></span>
-	<span style="float:right"><a onClick="clickBuy()" href="#buyCredits" data-role="button" data-rel="dialog" data-inline="true" data-mini="true">Buy Credits</a></span>
+	<span style="float:right"><a href="#payWall" data-role="button" data-rel="dialog" data-inline="true" data-mini="true">Buy Credits</a></span>
 	<iframe id="track" style="visibility: hidden; height: 0px; width: 0px;" src=""></iframe>  
 </div>
 <ul id="comics2" data-role="listview" data-inset="true">
@@ -50,21 +50,58 @@
 	<div data-role="content">
 	    <h3>50 FREE CREDITS!</h3>
 		<p>The Sex Comics app is still in beta, and therefore as an early user we would like to give you additional 50 free credits every day. Have fun reading the comics!</p>
-    	<a href="#" data-role="button" data-rel="back" data-inline="true" data-mini="true">Thanks</a>
+    	<a href="#comicsList" data-role="button" data-inline="true" data-mini="true">Thanks</a>
+    </div>
+</div>
+<div data-role="page" id="payWall" data-theme="e" data-overlay-theme="a">
+	<div data-role="content">
+		<ul data-role="listview" data-inset="true" data-divider-theme="a">
+			<li data-role="list-divider">Shop</li>		
+			<li>
+			<div class="ui-grid-b">
+				<div class="ui-block-a">$0.99</div>
+				<div class="ui-block-b">100 Panel Credits </div>
+				<div class="ui-block-c" style="float: right"><a onClick="clickBuy(0.99)" href="#buyCredits" data-role="button" data-rel=dialog" data-mini="true" data-theme="b">Buy</a></div>
+			</div>
+			</li>
+			<li>
+			<div class="ui-grid-b">
+				<div class="ui-block-a">$1.99</div>
+				<div class="ui-block-b">210 Panel Credits </div>
+				<div class="ui-block-c" style="float: right"><a onClick="clickBuy(1.99)" href="#buyCredits" data-role="button" data-rel="dialog" data-mini="true" data-theme="b">Buy</a></div>
+			</div>
+			</li>
+			<li>
+			<div class="ui-grid-b">
+				<div class="ui-block-a">$4.99</div>
+				<div class="ui-block-b">580 Panel Credits </div>
+				<div class="ui-block-c" style="float: right"><a onClick="clickBuy(4.99)" href="#buyCredits" data-role="button" data-rel="dialog" data-mini="true" data-theme="b">Buy</a></div>
+			</div>
+			</li>
+			<li>
+			<div class="ui-grid-b">
+				<div class="ui-block-a">$9.99</div>
+				<div class="ui-block-b">1300 Panel Credits </div>
+				<div class="ui-block-c" style="float: right"><a onClick="clickBuy(9.99)" href="#buyCredits" data-role="button" data-rel="dialog" data-mini="true" data-theme="b">Buy</a></div>
+			</div>
+			</li>
+		</ul> 	        
+    	<a href="#" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>
     </div>
 </div>
 <div data-role="page" id="dailyCredits" data-theme="e" data-overlay-theme="a">
 	<div data-role="content">
 	    <h3>DAILY FREE CREDITS!</h3>
 		<p id="dailyCreditsText"></p>
-    	<a href="#page1" data-role="button" data-inline="true" data-mini="true">Thanks</a>
+    	<a href="#comicsList" data-role="button" data-inline="true" data-mini="true">Thanks</a>
     </div>
 </div>
 <div data-role="page" id="noCredits" data-theme="e" data-overlay-theme="a">
 	<div data-role="content">
 	    <h3>No Panel Credits Left!</h3>
 		<p>You need to buy more credits, or come back tomorrow to get free daily credits.</p>
-    	<a href="#page1" data-role="button" data-inline="true" data-mini="true">OK</a>
+    	<a href="#payWall" data-role="button" data-rel="dialog" data-inline="true" data-theme="b" data-mini="true">Buy</a>
+    	<a href="#comicsList" data-role="button" data-inline="true" data-mini="true">Cancel</a>
     </div>
 </div>
 

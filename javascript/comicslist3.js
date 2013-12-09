@@ -87,7 +87,7 @@ function readPanels(currentComic) {
 	return panelPointer[currentComic];
 }
 
-function gaTrack(mode) {	
+function gaTrack(mode, sum100) {	
 	if (mode == "READ") {
 		console.log("READ page"+currentPage());
 //		$.get( "http://mobcomics.com/zines/analytics/track.html?category=read&action=comic"+currentComic+"&label=page"+currentPage() );
@@ -104,7 +104,7 @@ function gaTrack(mode) {
 	}	
 	if (mode == "PAYWALL") {
 		console.log("PAYWALL");
-		$('#track').get(0).contentWindow.location.replace('http://mobcomics.com/zines/analytics/track.html?category=credits&action=click&label=paywall');
+		$('#track').get(0).contentWindow.location.replace('http://mobcomics.com/zines/analytics/track.html?category=credits&action=click&label=paywall'+sum100);
 	}	
 	if (mode == "USED_ALL_CREDITS") {
 		console.log("PAYWALL");
@@ -116,10 +116,11 @@ function showCredits() {
 	$("#creditsLine").html("You have <span style='font-weight:bold;'>"+readCredits()+" panel credits</span> left");	
 }
 
-function clickBuy() {
+function clickBuy(sum) {
 	addCredits(50);
+	console.log("tried to buy $"+sum);
 	showCredits();
-	gaTrack("PAYWALL");
+	gaTrack("PAYWALL", sum*100);
 }
 
 function comicsListDailyCreditsCheck() {
