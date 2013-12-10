@@ -1,6 +1,7 @@
 // JavaScript Document
 var windowLoaded = false;
 var appDataLoaded = false;
+var blocks = 6;
 
 $(window).load(function() { init(); });
 
@@ -45,18 +46,20 @@ function loadScript(){
 }
 
 function drawBlocks() {
-	var blocks = 7;
 	console.log(backgroundImageHeight());
 	var imageBlockHeight = backgroundImageHeight()/blocks;
 	var imageBlockWidth = backgroundImageWidth()/blocks;
-	$("#block1").css("top", imageBlockHeight);
-	$("#block1").css("height", imageBlockHeight);
-	$("#block1").css("left", widthOffSet());
-	$("#block1").css("width", imageBlockWidth);
-	$("#block2").css("top", 3*imageBlockHeight);
-	$("#block2").css("height", imageBlockHeight);
-	$("#block2").css("width", imageBlockWidth);	
-	$("#block2").css("left", widthOffSet());
+	var top = parseInt($(".pinUpImageStyle").position().top);
+	console.log(top);
+	for (var r=0;r<(blocks-2);r++) {
+		for (var c=0;c<(blocks-2);c++) {
+			$("<div class='spinnerBlock'></div>").attr('id','block'+r+'_'+c).appendTo('.pinUpImageStyle');	
+			$("#block"+r+'_'+c).css("top", top+imageBlockHeight*(r+1));
+			$("#block"+r+'_'+c).css("height", imageBlockHeight);
+			$("#block"+r+'_'+c).css("width", imageBlockWidth);	
+			$("#block"+r+'_'+c).css("left", widthOffSet()+imageBlockWidth*(c+1));		
+		}
+	}
 }
 
 function backgroundImageHeight() {
@@ -68,5 +71,18 @@ function backgroundImageWidth() {
 }
 
 function widthOffSet() {
-	return  (parseInt($(".pinUpImageStyle").css("width"))-backgroundImageWidth())/2;
+	return  1.12*(parseInt($(".pinUpImageStyle").css("width"))-backgroundImageWidth())/2; // FIX THIS: counts wrong
+}
+
+function removeRandomBlock() {
+	var r = Math.floor((Math.random()*(blocks-2)));
+	var c = Math.floor((Math.random()*(blocks-2)));
+	$("#block"+r+'_'+c).css("background-color", '#444');
+	$("#block"+r+'_'+c).css("visibility", 'visible');
+	window.setTimeout(flashBlock, 300, [r, c]);	
+}
+
+function flashBlock(rc) {
+	console.log("hide"+rc);
+	$("#block"+rc[0]+'_'+rc[1]).css("visibility", 'hidden');	
 }
