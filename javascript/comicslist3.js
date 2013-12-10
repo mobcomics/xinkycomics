@@ -117,9 +117,9 @@ function showCredits() {
 }
 
 function clickBuy(sum) {
-	addCredits(50);
+//	addCredits(50);
 	console.log("tried to buy $"+sum);
-	showCredits();
+//	showCredits();
 	gaTrack("PAYWALL", sum*100);
 }
 
