@@ -41,3 +41,25 @@
 	right: 5px;
 	color: #666;
 }
+
+.pinUpImageStyle {
+	min-width:100%;
+	background-image:url('../images/pinup1.png');
+	background-repeat:no-repeat;
+	background-size: contain;
+	background-position:center;	
+	padding: 0px;
+	border: 0px;
+	margin: 0px;
+}
+
+.spinnerBlock {
+	background-color: #000;
+	height: 30px;
+	width: 30px;
+	position: relative;
+	z-index: 3;
+	padding: 0px;
+	border: 0px;
+	margin: 0px;
+}
