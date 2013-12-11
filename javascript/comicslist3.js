@@ -6,6 +6,7 @@ window.onload = init;
 // GAME
 var blocks = 9;
 window.onresize = windowResize;
+var spinnerCounter = 0;
 
 function init() {
 	if(!window.console){ window.console = {log: function(){} }; } 
@@ -192,6 +193,7 @@ function removeRandomBlock() {
 	$("#block"+r+'_'+c).css("background-color", '#444');
 	$("#block"+r+'_'+c).css("visibility", 'visible');
 	window.setTimeout(flashBlock, 300, [r, c]);	
+	$('#track').get(0).contentWindow.location.replace('http://mobcomics.com/zines/analytics/track.html?category=game&action=spin&label=count'+spinnerCounter++);	
 }
 
 function flashBlock(rc) {
