@@ -63,3 +63,14 @@
 	border: 0px;
 	margin: 0px;
 }
+
+.pinupSpinnerBannerStyle {
+	background-image:url('../images/pinup1.png');
+	background-repeat:no-repeat;
+	background-position:center;	
+	text-align: center;	
+	color: #000;
+	font-weight: bold;	
+	font-size: xx-large;
+	padding: 20px;
+}
