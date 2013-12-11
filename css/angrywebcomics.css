@@ -60,7 +60,9 @@
 	position: absolute;
 	z-index: 3;
 	padding: 0px;
-	border: 3px;
+	border-width: 1px;
+	border-style:solid;
+	border-color:#222;	
 	margin: 0px;
 }
 
@@ -71,6 +73,7 @@
 	text-align: center;	
 	color: #000;
 	font-weight: bold;	
-	font-size: xx-large;
-	padding: 20px;
+	font-size: x-large;
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
