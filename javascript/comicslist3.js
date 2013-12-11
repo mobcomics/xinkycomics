@@ -1,8 +1,11 @@
 // JavaScript Document
 var windowLoaded = false;
 var comicDataLoaded = false;
-
 window.onload = init;
+
+// GAME
+var blocks = 9;
+window.onresize = windowResize;
 
 function init() {
 	if(!window.console){ window.console = {log: function(){} }; } 
@@ -25,6 +28,9 @@ function continueInit() {
 	window.setTimeout(comicsListDailyCreditsCheck, 500);
 	window.setTimeout(gaTrack, 1000, ["VIEW"]);
 	showCredits();
+
+// GAME	
+	drawBlocks();
 }
 
 function showComics2() {
@@ -135,4 +141,72 @@ function comicsListDailyCreditsCheck() {
 		$.mobile.changePage( "#noCredits", { role: "dialog" } );
 	}			   
 }
+
+// GAME
+
+function drawBlocks() {
+	$(".pinUpImageStyle").css("height", window.innerHeight-150);	
+	console.log(backgroundImageHeight());
+	var imageBlockHeight = backgroundImageHeight()/blocks;
+	var imageBlockWidth = backgroundImageWidth()/blocks;
+	var top = parseInt($(".pinUpImageStyle").position().top);
+	console.log(top);
+	for (var r=0;r<(blocks-2);r++) {
+		for (var c=0;c<(blocks-2);c++) {
+			$("<div class='spinnerBlock'></div>").attr('id','block'+r+'_'+c).appendTo('.pinUpImageStyle');	
+			$("#block"+r+'_'+c).css("top", top+imageBlockHeight*(r+1));
+			$("#block"+r+'_'+c).css("height", imageBlockHeight);
+			$("#block"+r+'_'+c).css("width", imageBlockWidth);	
+			$("#block"+r+'_'+c).css("left", widthOffSet()+imageBlockWidth*(c+1));		
+		}
+	}
+}
+
+function backgroundImageHeight() {
+	var bgih = parseInt($(".pinUpImageStyle").css("height"));
+	console.log("bgih: "+bgih);
+	return bgih;
+}
+
+function backgroundImageWidth() {
+	var bgiw = 743*(parseInt($(".pinUpImageStyle").css("height"))/1000);
+	console.log("bgiw: "+bgiw);	
+	return bgiw;
+}
+
+function widthOffSet() {
+	var offSet = 1.12*(parseInt(window.innerWidth)-backgroundImageWidth())/2;
+	console.log("offSet: "+offSet);
+	return  offSet; 
+}
+
+function removeRandomBlock() {
+	var r = Math.floor((Math.random()*(blocks-2)));
+	var c = Math.floor((Math.random()*(blocks-2)));
+	$("#block"+r+'_'+c).css("background-color", '#444');
+	$("#block"+r+'_'+c).css("visibility", 'visible');
+	window.setTimeout(flashBlock, 300, [r, c]);	
+}
+
+function flashBlock(rc) {
+	console.log("hide"+rc);
+	$("#block"+rc[0]+'_'+rc[1]).css("visibility", 'hidden');	
+}
+
+function windowResize () { // is called always when orientation is changed, by user 
+	console.log("resize");
+	var imageBlockHeight = backgroundImageHeight()/blocks;
+	var imageBlockWidth = backgroundImageWidth()/blocks;
+	var top = parseInt($(".pinUpImageStyle").position().top);	
+	for (var r=0;r<(blocks-2);r++) {
+		for (var c=0;c<(blocks-2);c++) {
+			$("#block"+r+'_'+c).css("top", top+imageBlockHeight*(r+1));
+			$("#block"+r+'_'+c).css("height", imageBlockHeight);
+			$("#block"+r+'_'+c).css("width", imageBlockWidth);	
+			$("#block"+r+'_'+c).css("left", widthOffSet()+imageBlockWidth*(c+1));		
+		}
+	}
+	return false;
+}
+
 

@@ -1,8 +1,8 @@
 // JavaScript Document
 var windowLoaded = false;
 var appDataLoaded = false;
-var blocks = 6;
-
+var blocks = 9;
+window.onresize = windowResize;
 $(window).load(function() { init(); });
 
 function init() {
@@ -85,4 +85,19 @@ function removeRandomBlock() {
 function flashBlock(rc) {
 	console.log("hide"+rc);
 	$("#block"+rc[0]+'_'+rc[1]).css("visibility", 'hidden');	
+}
+
+function windowResize () { // is called always when orientation is changed, by user 
+	var imageBlockHeight = backgroundImageHeight()/blocks;
+	var imageBlockWidth = backgroundImageWidth()/blocks;
+	var top = parseInt($(".pinUpImageStyle").position().top);	
+	for (var r=0;r<(blocks-2);r++) {
+		for (var c=0;c<(blocks-2);c++) {
+			$("#block"+r+'_'+c).css("top", top+imageBlockHeight*(r+1));
+			$("#block"+r+'_'+c).css("height", imageBlockHeight);
+			$("#block"+r+'_'+c).css("width", imageBlockWidth);	
+			$("#block"+r+'_'+c).css("left", widthOffSet()+imageBlockWidth*(c+1));		
+		}
+	}
+	return false;
 }

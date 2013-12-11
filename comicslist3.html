@@ -18,7 +18,7 @@
     <a href="index.html" rel="external" data-icon="home" class="ui-btn-left">Intro</a>
     <a href="#howtoread" data-rel="popup" data-icon="info" class="ui-btn-right">How?</a>
 </div>
-	<a style="text-decoration:none" href="game.html" rel="external" >
+	<a onClick="window.setTimeout(windowResize, 200);" style="text-decoration:none" href="#game" data-rel="page">
 	<div class="pinupSpinnerBannerStyle">
 		PLAY PIN-UP SPINNER
 	</div>
@@ -61,7 +61,7 @@
 <div data-role="page" id="payWall" data-theme="e" data-overlay-theme="a">
 	<div data-role="content">
 		<ul data-role="listview" data-inset="true" data-divider-theme="a">
-			<li data-role="list-divider">Shop</li>		
+			<li data-role="list-divider">Sex Comics Shop</li>		
 			<li>
 			<div class="ui-grid-b">
 				<div class="ui-block-a">$0.99</div>
@@ -108,6 +108,21 @@
     	<a href="#payWall" data-role="button" data-rel="dialog" data-inline="true" data-theme="b" data-mini="true">Buy</a>
     	<a href="#comicsList" data-role="button" data-inline="true" data-mini="true">Cancel</a>
     </div>
+</div>
+
+<div data-role="page" id="game">
+<div data-role="header">
+    <span class="ui-title">The Pin-up Spinner</span>
+    <a href="#comicsList" data-rel="page" data-icon="grid" class="ui-btn-left">Comics</a>    
+</div>
+<div data-role="content">
+	<div>
+		<div class="pinUpImageStyle">
+		</div>
+	</div>
+    <a href="#" onClick="removeRandomBlock();" data-role="button" data-theme="e">SPIN TO REVEAL</a>
+	<iframe id="track" style="visibility: hidden" src=""></iframe>   
+</div>
 </div>
 
 </body></html>
