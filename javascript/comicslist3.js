@@ -163,13 +163,15 @@ function drawBlocks() {
 }
 
 function backgroundImageHeight() {
-	var bgih = parseInt($(".pinUpImageStyle").css("height"));
+//	var bgih = parseInt($(".pinUpImageStyle").css("height"));
+	var bgih = parseInt(window.innerHeight)-200;	
 	console.log("bgih: "+bgih);
 	return bgih;
 }
 
 function backgroundImageWidth() {
-	var bgiw = 743*(parseInt($(".pinUpImageStyle").css("height"))/1000);
+//	var bgiw = 743*(parseInt($(".pinUpImageStyle").css("height"))/1000);
+	var bgiw = backgroundImageHeight()*(1000/1300);
 	console.log("bgiw: "+bgiw);	
 	return bgiw;
 }
@@ -179,7 +181,7 @@ function backgroundImageTop() {
 }
 
 function widthOffSet() {
-	var offSet = 1.12*(parseInt(window.innerWidth)-backgroundImageWidth())/2;
+	var offSet = (parseInt(window.innerWidth)-backgroundImageWidth())/2;
 	console.log("offSet: "+offSet);
 	return  offSet; 
 }
