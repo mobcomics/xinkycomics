@@ -149,7 +149,7 @@ function drawBlocks() {
 	console.log(backgroundImageHeight());
 	var imageBlockHeight = backgroundImageHeight()/blocks;
 	var imageBlockWidth = backgroundImageWidth()/blocks;
-	var top = parseInt($(".pinUpImageStyle").position().top);
+	var top = backgroundImageTop();
 	console.log(top);
 	for (var r=0;r<(blocks-2);r++) {
 		for (var c=0;c<(blocks-2);c++) {
@@ -174,6 +174,10 @@ function backgroundImageWidth() {
 	return bgiw;
 }
 
+function backgroundImageTop() {
+	return 60;
+}
+
 function widthOffSet() {
 	var offSet = 1.12*(parseInt(window.innerWidth)-backgroundImageWidth())/2;
 	console.log("offSet: "+offSet);
@@ -194,10 +198,11 @@ function flashBlock(rc) {
 }
 
 function windowResize () { // is called always when orientation is changed, by user 
+	$(".pinUpImageStyle").css("background-image", "");
 	console.log("resize");
 	var imageBlockHeight = backgroundImageHeight()/blocks;
 	var imageBlockWidth = backgroundImageWidth()/blocks;
-	var top = parseInt($(".pinUpImageStyle").position().top);	
+	var top = backgroundImageTop();	
 	for (var r=0;r<(blocks-2);r++) {
 		for (var c=0;c<(blocks-2);c++) {
 			$("#block"+r+'_'+c).css("top", top+imageBlockHeight*(r+1));
@@ -206,6 +211,7 @@ function windowResize () { // is called always when orientation is changed, by u
 			$("#block"+r+'_'+c).css("left", widthOffSet()+imageBlockWidth*(c+1));		
 		}
 	}
+	$(".pinUpImageStyle").css("background-image", "url('./images/pinup1.png')");
 	return false;
 }
 
