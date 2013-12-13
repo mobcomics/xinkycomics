@@ -55,8 +55,10 @@ function loadIframe() {
 }
 
 function resizeIframe() {
-	$("#scroller").css("width", $("#body").innerWidth()+"px");	
-	$("#actualFrame").css("width", $("#body").innerWidth()+"px");	
+	$("#scroller").css("width", window.innerWidth);	
+	$("#actualFrame").css("width", window.innerWidth);	
+//	$("#scroller").css("width", $("#body").innerWidth()+"px");	
+//	$("#actualFrame").css("width", $("#body").innerWidth()+"px");	
 }
 
 function gup( name ) {

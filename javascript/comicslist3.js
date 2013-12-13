@@ -5,7 +5,7 @@ window.onload = init;
 
 // GAME
 var blocks = 9;
-// window.onresize = windowResize;
+window.onresize = windowResize;
 var spinnerCounter = 0;
 
 function init() {
