@@ -51,7 +51,7 @@ function imageLoaded(i, p) {
 function loadIframe() {
 	var c = comics.comicsList[(gup("comic")) ? gup("comic") : 0];	
 	$("#actualFrame").attr("src", c.creatorUrl);
-//	$('#scroller').css({'overflow' : 'scroll', '-webkit-overflow-scrolling' : 'touch'});		
+//	$('#scroller').css({'overflow' : 'scroll', '-webkit-overflow-scrolling' : 'touch'}); // breaks the app		
 }
 
 function resizeIframe() {
