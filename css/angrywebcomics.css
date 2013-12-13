@@ -77,3 +77,11 @@
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
+
+.trackIframeStyle {
+	height: 0px;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	border: none;
+}
