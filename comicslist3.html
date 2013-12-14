@@ -115,12 +115,17 @@
     <span class="ui-title">Pin-up Spinner</span>
     <a href="#comicsList" data-rel="page" data-icon="grid" class="ui-btn-left">Comics</a>    
 </div>
+<div data-role="content" data-theme="e">
+	<span id="gamePayoutLine2">Gold Payout: x20, </span>
+	<span id="gamePayoutLine1">Payout: x1</span>
+	<span style="float:right"><span id="gameCreditsLine">20</span><a href="#payWall" data-role="button" data-rel="dialog" data-inline="true" data-mini="true">Buy Credits</a></span>
+</div>
 <div data-role="content">
 	<div>
 		<div class="pinUpImageStyle">
 		</div>
 	</div>
-    <a href="#" onClick="removeRandomBlock();" data-role="button" data-theme="e">SPIN TO REVEAL</a>
+    <a href="#" onClick="tapToSpin();" data-role="button" data-theme="a">TAP TO REVEAL</a>
 	<iframe id="track" style="visibility: hidden" src=""></iframe>   
 </div>
 </div>

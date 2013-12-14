@@ -8,6 +8,14 @@ var blocks = 9;
 window.onresize = windowResize;
 var spinnerCounter = 0;
 
+// GAME ONLINE DATA
+var goldenBlocks = new Array();
+for (var q=0; q<15; q++) {
+	goldenBlocks[q] = new Array();
+}
+goldenBlocks[2][0] = true;	
+goldenBlocks[3][5] = true;	
+
 function init() {
 	if(!window.console){ window.console = {log: function(){} }; } 
 	console.log("windowLoaded");
@@ -146,19 +154,24 @@ function comicsListDailyCreditsCheck() {
 // GAME
 
 function drawBlocks() {
-	$(".pinUpImageStyle").css("height", window.innerHeight-150);	
-	console.log(backgroundImageHeight());
+	$(".pinUpImageStyle").css("height", window.innerHeight-200);
+	showGameCredits();	
+	console.log("drawBlock()");
+	blockLoop(true);	
+}
+
+function blockLoop(first) {
 	var imageBlockHeight = backgroundImageHeight()/blocks;
 	var imageBlockWidth = backgroundImageWidth()/blocks;
-	var top = backgroundImageTop();
-	console.log(top);
+	var top = backgroundImageTop();	
 	for (var r=0;r<(blocks-2);r++) {
 		for (var c=0;c<(blocks-2);c++) {
-			$("<div class='spinnerBlock'></div>").attr('id','block'+r+'_'+c).appendTo('.pinUpImageStyle');	
+			if (first) $("<div class='spinnerBlock'></div>").attr('id','block'+r+'_'+c).appendTo('.pinUpImageStyle');	
 			$("#block"+r+'_'+c).css("top", top+imageBlockHeight*(r+1));
 			$("#block"+r+'_'+c).css("height", imageBlockHeight);
 			$("#block"+r+'_'+c).css("width", imageBlockWidth);	
-			$("#block"+r+'_'+c).css("left", widthOffSet()+imageBlockWidth*(c+1));		
+			$("#block"+r+'_'+c).css("left", widthOffSet()+imageBlockWidth*(c+1));
+			if (goldenBlocks[c][r]) $("#block"+r+'_'+c).css("background-color","#ffd700");
 		}
 	}
 }
@@ -166,30 +179,32 @@ function drawBlocks() {
 function backgroundImageHeight() {
 //	var bgih = parseInt($(".pinUpImageStyle").css("height"));
 	var bgih = parseInt(window.innerHeight)-200;	
-	console.log("bgih: "+bgih);
+//	console.log("bgih: "+bgih);
 	return bgih;
 }
 
 function backgroundImageWidth() {
 //	var bgiw = 743*(parseInt($(".pinUpImageStyle").css("height"))/1000);
 	var bgiw = backgroundImageHeight()*(1000/1300);
-	console.log("bgiw: "+bgiw);	
+//	console.log("bgiw: "+bgiw);	
 	return bgiw;
 }
 
 function backgroundImageTop() {
-	return 60;
+	return 130;
 }
 
 function widthOffSet() {
 	var offSet = (parseInt(window.innerWidth)-backgroundImageWidth())/2;
-	console.log("offSet: "+offSet);
 	return  offSet; 
 }
 
-function removeRandomBlock() {
+function tapToSpin() {
 	var r = Math.floor((Math.random()*(blocks-2)));
 	var c = Math.floor((Math.random()*(blocks-2)));
+	useCredits(1);
+	console.log(regularPayout());
+	showGameCredits();
 	$("#block"+r+'_'+c).css("background-color", '#444');
 	$("#block"+r+'_'+c).css("visibility", 'visible');
 	window.setTimeout(flashBlock, 300, [r, c]);	
@@ -201,22 +216,28 @@ function flashBlock(rc) {
 	$("#block"+rc[0]+'_'+rc[1]).css("visibility", 'hidden');	
 }
 
-function windowResize () { // is called always when orientation is changed, by user 
-	$(".pinUpImageStyle").css("background-image", "");
-	console.log("resize");
-	var imageBlockHeight = backgroundImageHeight()/blocks;
-	var imageBlockWidth = backgroundImageWidth()/blocks;
-	var top = backgroundImageTop();	
+function regularPayout() {
+	var allBlocks = (blocks-2)*(blocks-2);
+	var remainingBlocks = 0;
 	for (var r=0;r<(blocks-2);r++) {
 		for (var c=0;c<(blocks-2);c++) {
-			$("#block"+r+'_'+c).css("top", top+imageBlockHeight*(r+1));
-			$("#block"+r+'_'+c).css("height", imageBlockHeight);
-			$("#block"+r+'_'+c).css("width", imageBlockWidth);	
-			$("#block"+r+'_'+c).css("left", widthOffSet()+imageBlockWidth*(c+1));		
+			if ($("#block"+r+'_'+c).css("visibility") != 'hidden') remainingBlocks++; 
 		}
-	}
+	}	
+	return parseInt(allBlocks/remainingBlocks);
+}
+
+function windowResize() { // is called always when orientation is changed, by user 
+	$(".pinUpImageStyle").css("background-image", "");
+	$(".pinUpImageStyle").css("height", window.innerHeight-200);		
+	console.log("resize");
+	blockLoop(false);
 	$(".pinUpImageStyle").css("background-image", "url('./images/pinup1.png')");
 	return false;
+}
+
+function showGameCredits() {
+	$("#gameCreditsLine").html("<span style='font-weight:bold;'>"+readCredits()+"</span>");		
 }
 
 
