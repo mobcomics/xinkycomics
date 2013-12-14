@@ -134,7 +134,7 @@ function loadScript(){
 		comicDataLoaded = true;
 		if (windowLoaded) continueInit();
     };
-    script.src = comicFolder+""+c.dataFile;
+    script.src = comicFolder+""+c.dataFile+"?"+$.now();
     document.getElementsByTagName("head")[0].appendChild(script);
 }
 
