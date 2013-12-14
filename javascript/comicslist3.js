@@ -13,8 +13,8 @@ var goldenBlocks = new Array();
 for (var q=0; q<15; q++) {
 	goldenBlocks[q] = new Array();
 }
-goldenBlocks[2][0] = true;	
-goldenBlocks[3][5] = true;	
+goldenBlocks[3][1] = true;	
+goldenBlocks[4][6] = true;	
 
 function init() {
 	if(!window.console){ window.console = {log: function(){} }; } 
@@ -155,23 +155,29 @@ function comicsListDailyCreditsCheck() {
 
 function drawBlocks() {
 	$(".pinUpImageStyle").css("height", window.innerHeight-200);
+	updatePayoutTable();	
 	showGameCredits();	
 	console.log("drawBlock()");
 	blockLoop(true);	
+}
+
+function updatePayoutTable() {
+	$("#gamePayoutLine").text("Golden Payout: "+goldPayout()+", Black Payout: "+regularPayout());	
 }
 
 function blockLoop(first) {
 	var imageBlockHeight = backgroundImageHeight()/blocks;
 	var imageBlockWidth = backgroundImageWidth()/blocks;
 	var top = backgroundImageTop();	
-	for (var r=0;r<(blocks-2);r++) {
-		for (var c=0;c<(blocks-2);c++) {
+	for (var r=0;r<(blocks);r++) {
+		for (var c=0;c<(blocks);c++) {
 			if (first) $("<div class='spinnerBlock'></div>").attr('id','block'+r+'_'+c).appendTo('.pinUpImageStyle');	
-			$("#block"+r+'_'+c).css("top", top+imageBlockHeight*(r+1));
+			$("#block"+r+'_'+c).css("top", top+imageBlockHeight*(r));
 			$("#block"+r+'_'+c).css("height", imageBlockHeight);
 			$("#block"+r+'_'+c).css("width", imageBlockWidth);	
-			$("#block"+r+'_'+c).css("left", widthOffSet()+imageBlockWidth*(c+1));
+			$("#block"+r+'_'+c).css("left", widthOffSet()+imageBlockWidth*(c));
 			if (goldenBlocks[c][r]) $("#block"+r+'_'+c).css("background-color","#ffd700");
+			if (r==0 || c==0 || r==blocks-1 || c==blocks-1) $("#block"+r+'_'+c).css("visibility", "hidden");
 		}
 	}
 }
@@ -200,15 +206,26 @@ function widthOffSet() {
 }
 
 function tapToSpin() {
-	var r = Math.floor((Math.random()*(blocks-2)));
-	var c = Math.floor((Math.random()*(blocks-2)));
+	if (readCredits() <= 0) {
+		gaTrack("USED_ALL_CREDITS");
+		$.mobile.changePage( "#noCredits", { role: "dialog" } );
+		showCredits();
+		return;
+	}
+	var r = Math.floor((Math.random()*(blocks)));
+	var c = Math.floor((Math.random()*(blocks)));
 	useCredits(1);
-	console.log(regularPayout());
-	showGameCredits();
+	if ($("#block"+r+'_'+c).css("visibility") != 'hidden' && goldenBlocks[c][r]) { // gold payout
+		addCredits(goldPayout());
+	} else if ($("#block"+r+'_'+c).css("visibility") != 'hidden') { // regular payout
+		addCredits(regularPayout());		
+	}
 	$("#block"+r+'_'+c).css("background-color", '#444');
 	$("#block"+r+'_'+c).css("visibility", 'visible');
 	window.setTimeout(flashBlock, 300, [r, c]);	
 	$('#track').get(0).contentWindow.location.replace('http://mobcomics.com/zines/analytics/track.html?category=game&action=spin&label=count'+spinnerCounter++);	
+	showGameCredits();
+	updatePayoutTable();		
 }
 
 function flashBlock(rc) {
@@ -217,14 +234,28 @@ function flashBlock(rc) {
 }
 
 function regularPayout() {
-	var allBlocks = (blocks-2)*(blocks-2);
+	var allBlocks = (blocks)*(blocks);
 	var remainingBlocks = 0;
-	for (var r=0;r<(blocks-2);r++) {
-		for (var c=0;c<(blocks-2);c++) {
+	for (var r=0;r<(blocks);r++) {
+		for (var c=0;c<(blocks);c++) {
 			if ($("#block"+r+'_'+c).css("visibility") != 'hidden') remainingBlocks++; 
 		}
 	}	
-	return parseInt(allBlocks/remainingBlocks);
+	var payout = .8*allBlocks/remainingBlocks;
+	if (payout > .5*goldPayout()) payout = .5*payout;
+	return parseInt(payout);
+}
+
+function goldPayout() {
+	
+	var borderBlocks = 2*blocks+2*(blocks-2);
+	var goldBlocks = 0;
+	for (var r=0;r<(blocks-2);r++) {
+		for (var c=0;c<(blocks-2);c++) {
+			if (goldenBlocks[c][r]) goldBlocks++; 
+		}
+	}	
+	return parseInt(.8*borderBlocks/goldBlocks);
 }
 
 function windowResize() { // is called always when orientation is changed, by user 
