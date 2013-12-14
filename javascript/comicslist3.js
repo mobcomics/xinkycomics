@@ -79,7 +79,7 @@ function loadScript(){
 		comicDataLoaded = true;
 		if (windowLoaded) continueInit();
     };
-    script.src = comics.comicsList[0].folderUrl+""+comics.comicsList[0].dataFile;
+    script.src = comics.comicsList[0].folderUrl+""+comics.comicsList[0].dataFile+"?"+$.now();
     document.getElementsByTagName("head")[0].appendChild(script);
 }
 
