@@ -22,7 +22,7 @@ function continueInit(i) {
 	$.mobile.loading('hide');
 	document.getElementById("description").innerHTML = editor.description;
 	document.getElementById("post").innerHTML = editor.post;
-	$("#editor").html("Stahlhandske");
+	$("#editor").html("Foksy");
 	window.setTimeout(gaTrack, 500);
 //	jQuery( window ).on( "swipe", function( event ) {
 //		$("#editor").html("zipe");								   
