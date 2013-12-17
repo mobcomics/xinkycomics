@@ -137,7 +137,8 @@ function clickBuy(sum) {
 //	addCredits(50);
 	console.log("tried to buy $"+sum);
 //	showCredits();
-	gaTrack("PAYWALL", sum*100);
+	window.setTimeout(gaTrack, 500, ["PAYWALL", sum*100]);	
+//	gaTrack("PAYWALL", sum*100);
 }
 
 function comicsListDailyCreditsCheck() {
