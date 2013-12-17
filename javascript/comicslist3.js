@@ -156,7 +156,6 @@ function comicsListDailyCreditsCheck() {
 // GAME
 
 function drawBlocks() {
-	lastSourceForPaywall = "game";
 	$(".pinUpImageStyle").css("height", window.innerHeight-200);
 	updatePayoutTable();	
 	showGameCredits();	
@@ -209,6 +208,7 @@ function widthOffSet() {
 }
 
 function tapToSpin() {
+	lastSourceForPaywall = "game";	
 	if (readCredits() <= 0) {
 		gaTrack("USED_ALL_CREDITS");
 		$.mobile.changePage( "#noCredits", { role: "dialog" } );
