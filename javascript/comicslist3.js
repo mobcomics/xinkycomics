@@ -2,6 +2,7 @@
 var windowLoaded = false;
 var comicDataLoaded = false;
 window.onload = init;
+var lastSourceForPaywall = "unknown";
 
 // GAME
 var blocks = 9;
@@ -31,6 +32,7 @@ function init() {
 };
 
 function continueInit() {
+	lastSourceForPaywall = "comic";	
 	$.mobile.loading('hide');
 	showComics2();
 //	comicsListDailyCreditsCheck();
@@ -119,7 +121,7 @@ function gaTrack(mode, sum100) {
 	}	
 	if (mode == "PAYWALL") {
 		console.log("PAYWALL");
-		$('#track').get(0).contentWindow.location.replace('http://mobcomics.com/zines/analytics/track.html?category=credits&action=click&label=paywall'+sum100);
+		$('#track').get(0).contentWindow.location.replace('http://mobcomics.com/zines/analytics/track.html?category=credits&action='+lastSourceForPaywall+'&label=paywall'+sum100);
 	}	
 	if (mode == "USED_ALL_CREDITS") {
 		console.log("PAYWALL");
@@ -154,6 +156,7 @@ function comicsListDailyCreditsCheck() {
 // GAME
 
 function drawBlocks() {
+	lastSourceForPaywall = "game";
 	$(".pinUpImageStyle").css("height", window.innerHeight-200);
 	updatePayoutTable();	
 	showGameCredits();	
