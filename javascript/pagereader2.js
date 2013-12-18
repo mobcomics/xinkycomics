@@ -7,8 +7,6 @@ var currentComic = "0";
 var pageCounter = 0;
 var loadingPage = false;
 
-
-
 function init() {
 	if(!window.console){ window.console = {log: function(){} }; } 
 	console.log("windowLoaded");
@@ -37,6 +35,7 @@ function checkIfAppendNewPage() {
 
 function appendNewPage() {
 	if (loadingPage) return;
+	if (nextPageFirstPanel() == null) return; // all pages already loaded
 	loadingPage = true;
 	var pp = nextPageFirstPanel();
 	$("#pages").append("<div id='pageDiv"+pageCounter+"' onClick='pageClicked()'><img style='width:100%;' id='page"+pageCounter+"' src=''></img></div>");
