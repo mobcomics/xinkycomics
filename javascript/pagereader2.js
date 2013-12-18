@@ -6,6 +6,14 @@ var panelPointer = [];
 var currentComic = "0";
 var pageCounter = 0;
 
+$(window).scroll(function() { checkScroll();
+//	   if($(window).scrollTop() + $(window).height() == $(document).height()) {
+//	       alert("bottom!");
+	       // getData();
+//	   }
+});
+
+
 function init() {
 	if(!window.console){ window.console = {log: function(){} }; } 
 	console.log("windowLoaded");
@@ -36,6 +44,11 @@ function appendNewPage() {
 
 function pageString() {
 	return currentPage()+"/"+totalPages();
+}
+
+function checkScroll() {
+	console.log($(window).scrollTop());
+	if ($(window).scrollTop() <= -10) alert("stretch");
 }
 
 function pageClicked() {
