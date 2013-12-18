@@ -23,15 +23,8 @@ function continueInit() {
 	$("#navigatorText").html(pageString());
 	window.setTimeout(gaTrack, 500, ["VIEW"]);
 	appendNewPage();
-//	appendNewPage();
-//	appendNewPage();
 //	$(window).scrollTop(30); does not work???
-	$(window).scroll(function() { checkScroll();
-//	   if($(window).scrollTop() + $(window).height() == $(document).height()) {
-//	       alert("bottom!");
-	       // getData();
-//	   }
-	});	
+	$(window).scroll(function() { checkScroll(); });	
 }
 
 function checkIfAppendNewPage() {
@@ -53,7 +46,8 @@ function appendNewPage() {
 		console.log("page height "+parseInt(window.innerHeight));
 		if (parseInt($("#pageDiv"+data.t).position().top)+parseInt($("#pageDiv"+data.t).height()) > window.innerHeight) {
 			console.log("over bottom"+data.t);
-			$("#pageDiv"+data.t).width(window.innerWidth/2);
+			$("#pageDiv"+data.t).css( "opacity", .05 );
+			// $("#pageDiv"+data.t).width(window.innerWidth/2);
 		}
 		checkIfAppendNewPage();
 	});	
