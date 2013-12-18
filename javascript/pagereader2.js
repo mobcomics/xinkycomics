@@ -46,7 +46,7 @@ function appendNewPage() {
 		console.log("page height "+parseInt(window.innerHeight));
 		if (parseInt($("#pageDiv"+data.t).position().top)+parseInt($("#pageDiv"+data.t).height()) > window.innerHeight) {
 			console.log("over bottom"+data.t);
-			$("#pageDiv"+data.t).css( "opacity", .05 );
+			$("#pageDiv"+data.t).css("opacity",.05);
 			// $("#pageDiv"+data.t).width(window.innerWidth/2);
 		}
 		checkIfAppendNewPage();
@@ -60,6 +60,10 @@ function pageString() {
 
 function checkScroll() {
 	console.log($(window).scrollTop());
+	for (var i=0; i < pageCounter; i++) {
+		if (parseInt($(window).scrollTop())+window.innerHeight-150 > parseInt($("#pageDiv"+i).position().top)) $("#pageDiv"+i).css("opacity", 1);
+	}	
+	console.log(pageCounter);
 	if ($(window).scrollTop() <= 10) console.log("top");
 }
 
