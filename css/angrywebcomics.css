@@ -85,3 +85,9 @@
 	padding: 0;
 	border: none;
 }
+
+.previousPageLoadStyle {
+	background-color: #555;	
+	height: 30px;
+	width: 100%;	
+}
