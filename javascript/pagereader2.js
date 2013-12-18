@@ -5,6 +5,7 @@ var comicFolder;
 var panelPointer = [];
 var currentComic = "0";
 var pageCounter = 0;
+var loadingPage = false;
 
 
 
@@ -28,11 +29,15 @@ function continueInit() {
 }
 
 function checkIfAppendNewPage() {
-	pageCounter++;
-	if (pageCounter < 3) appendNewPage();
+	if (pageCounter < 3) {
+		pageCounter++;
+		appendNewPage();
+	}
 }
 
 function appendNewPage() {
+	if (loadingPage) return;
+	loadingPage = true;
 	var pp = nextPageFirstPanel();
 	$("#pages").append("<div id='pageDiv"+pageCounter+"' onClick='pageClicked()'><img style='width:100%;' id='page"+pageCounter+"' src=''></img></div>");
 	$("#page"+pageCounter).bind('load', { t: pageCounter}, function(event) {
@@ -49,6 +54,7 @@ function appendNewPage() {
 			$("#pageDiv"+data.t).css("opacity",.05);
 			// $("#pageDiv"+data.t).width(window.innerWidth/2);
 		}
+		loadingPage = false;
 		checkIfAppendNewPage();
 	});	
 	$("#page"+pageCounter).attr('src',(pp <= 0) ? myComic.panels[0].pimage : myComic.panels[pp].pimage);	
@@ -63,8 +69,12 @@ function checkScroll() {
 	for (var i=0; i < pageCounter; i++) {
 		if (parseInt($(window).scrollTop())+window.innerHeight-150 > parseInt($("#pageDiv"+i).position().top)) $("#pageDiv"+i).css("opacity", 1);
 	}	
-	console.log(pageCounter);
+	console.log("page counter "+pageCounter);
 	if ($(window).scrollTop() <= 10) console.log("top");
+	if (!loadingPage && parseInt($(window).scrollTop())+window.innerHeight+100 > parseInt($("#pageDiv"+pageCounter).position().top)) {
+		pageCounter++;
+		appendNewPage();
+	}
 }
 
 function pageClicked() {
