@@ -23,9 +23,9 @@ function continueInit() {
 	$("#navigatorText").html(pageString());
 	window.setTimeout(gaTrack, 500, ["VIEW"]);
 	appendNewPage();
-	appendNewPage();
-	appendNewPage();
-	$(window).scrollTop(30);
+//	appendNewPage();
+//	appendNewPage();
+//	$(window).scrollTop(30); does not work???
 	$(window).scroll(function() { checkScroll();
 //	   if($(window).scrollTop() + $(window).height() == $(document).height()) {
 //	       alert("bottom!");
@@ -34,13 +34,30 @@ function continueInit() {
 	});	
 }
 
-function appendNewPage() {
-	$("#pages").append("<div id='pageDiv"+pageCounter+"' onClick='pageClicked()'><img style='width:100%;' id='page"+pageCounter+"' src=''></img></div>");
-	var p = nextPageFirstPanel();
-	$("#page"+pageCounter).attr('src',(p <= 0) ? myComic.panels[0].pimage : myComic.panels[p].pimage);	
-	setBrowserStoragePanelNumber(p);
-	$("#navigatorText").html(pageString());
+function checkIfAppendNewPage() {
 	pageCounter++;
+	if (pageCounter < 3) appendNewPage();
+}
+
+function appendNewPage() {
+	var pp = nextPageFirstPanel();
+	$("#pages").append("<div id='pageDiv"+pageCounter+"' onClick='pageClicked()'><img style='width:100%;' id='page"+pageCounter+"' src=''></img></div>");
+	$("#page"+pageCounter).bind('load', { t: pageCounter}, function(event) {
+		var p = nextPageFirstPanel();
+		var data = event.data;
+		console.log("loaded "+data.t);
+		setBrowserStoragePanelNumber(p);
+		$("#navigatorText").html(pageString());
+		console.log("over bottom scrolltop "+parseInt($("#pageDiv"+data.t).position().top));
+		console.log("over bottom height "+parseInt($("#pageDiv"+data.t).height()));
+		console.log("page height "+parseInt(window.innerHeight));
+		if (parseInt($("#pageDiv"+data.t).position().top)+parseInt($("#pageDiv"+data.t).height()) > window.innerHeight) {
+			console.log("over bottom"+data.t);
+			$("#pageDiv"+data.t).width(window.innerWidth/2);
+		}
+		checkIfAppendNewPage();
+	});	
+	$("#page"+pageCounter).attr('src',(pp <= 0) ? myComic.panels[0].pimage : myComic.panels[pp].pimage);	
 }
 
 function pageString() {
