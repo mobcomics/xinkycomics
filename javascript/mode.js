@@ -17,7 +17,7 @@ function init() {
 	var c = comics.comicsList[(gup("comic")) ? gup("comic") : 0];
 	currentComic = ""+(gup("comic") ? gup("comic") : 0) +"";	
 	$("#panelLink").attr("href", "reader/viewer.html?comic="+currentComic);		
-	$("#pageLink").attr("href", "pagereader.html?comic="+currentComic);		
+	$("#pageLink").attr("href", "pagereader2.html?comic="+currentComic);		
 	comicFolder = c.folderUrl;
 	if (comicDataLoaded) continueInit();
 }

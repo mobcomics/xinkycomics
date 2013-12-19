@@ -6,6 +6,7 @@ var panelPointer = [];
 var currentComic = "0";
 var pageCounter = 0;
 var loadingPage = false;
+var lastPageRead = false;
 
 function init() {
 	if(!window.console){ window.console = {log: function(){} }; } 
@@ -22,8 +23,14 @@ function continueInit() {
 	$("#navigatorText").html(pageString());
 	window.setTimeout(gaTrack, 500, ["VIEW"]);
 	appendNewPage();
-//	$(window).scrollTop(30); does not work???
+	window.setTimeout(setScroll, 1000);
+//	$(document).scrollTop(100); // does not work???
 	$(window).scroll(function() { checkScroll(); });	
+}
+
+function setScroll() {
+	window.scrollTo(0,100);	
+	console.log("setscroll");
 }
 
 function checkIfAppendNewPage() {
@@ -64,15 +71,17 @@ function pageString() {
 }
 
 function checkScroll() {
-	console.log($(window).scrollTop());
+//	console.log($(window).scrollTop());
 	for (var i=0; i < pageCounter; i++) {
 		if (parseInt($(window).scrollTop())+window.innerHeight-150 > parseInt($("#pageDiv"+i).position().top)) $("#pageDiv"+i).css("opacity", 1);
 	}	
 	console.log("page counter "+pageCounter);
 	if ($(window).scrollTop() <= 10) console.log("top");
+	if (lastPageRead) return;
 	if (!loadingPage && parseInt($(window).scrollTop())+window.innerHeight+100 > parseInt($("#pageDiv"+pageCounter).position().top)) {
 		pageCounter++;
 		appendNewPage();
+		if (nextPageFirstPanel() == null) lastPageRead = true;
 	}
 }
 
