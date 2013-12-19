@@ -149,7 +149,7 @@ function comicsListDailyCreditsCheck() {
 		showCredits();
 		return;
 	} else if (readCredits() <= 0) {
-		gaTrack("USED_ALL_CREDITS");
+		gaTrack("USED_ALL_CREDITS","");
 		$.mobile.changePage( "#noCredits", { role: "dialog" } );
 	}			   
 }
@@ -211,7 +211,7 @@ function widthOffSet() {
 function tapToSpin() {
 	lastSourceForPaywall = "game";	
 	if (readCredits() <= 0) {
-		gaTrack("USED_ALL_CREDITS");
+		gaTrack("USED_ALL_CREDITS","");
 		$.mobile.changePage( "#noCredits", { role: "dialog" } );
 		showCredits();
 		return;
