@@ -34,21 +34,15 @@ function continueInit() {
 	window.setTimeout(gaTrack, 500, ["VIEW"]);
 	appendNewPage();
 	window.setTimeout(setScroll, 50);
-//	$(document).scrollTop(100); // does not work???
 	$(window).scroll(function() { checkScroll(); });	
 }
 
 function setScroll() {
 	window.scrollTo(0,50);	
 	scrollSet = true;
-//	console.log("setscroll");
 }
 
 function checkIfAppendNewPage() {
-//	if (pageCounter < 3) {
-//		pageCounter++;
-//		appendNewPage();
-//	}
 	if ($("#pageDiv"+newestPageDownloaded).position().top < window.innerHeight) {
 		appendNewPage();
 	}
@@ -63,23 +57,10 @@ function prependPreviousPage() {
 	console.log("npr"+newestPageRead);
 	loadingOlderPage = true;
 	page = --oldestPageDownloaded;	
-//	var pp = previousPageFirstPanel();
 	$("#pages").prepend("<div id='pageDiv"+page+"' class='pageDivStyle'><img class='pageDivStyle' id='page"+page+"' src=''></img></div>");
 	$("#page"+page).bind('load', { t: page}, function(event) {
-//		var p = previousPageFirstPanel();
-//		var data = event.data;
-//		console.log("loaded "+data.t);
-//		setBrowserStoragePanelNumber(p);
-//		$("#navigatorText").html(pageString());
-/*		if (parseInt($("#pageDiv"+data.t).position().top)+parseInt($("#pageDiv"+data.t).height()) > window.innerHeight) {
-			console.log("over bottom"+data.t);
-			$("#pageDiv"+data.t).css("opacity",.05);
-			// $("#pageDiv"+data.t).width(window.innerWidth/2);
-		}
-*/		
 		setScroll();
 		window.setTimeout(allowLoadingOlderPage, 300);
-//		checkIfAppendNewPage();
 	});	
 	$("#page"+page).attr('src', imageOfPage(page));		
 }
@@ -90,44 +71,52 @@ function allowLoadingOlderPage() {
 
 function appendNewPage() {
 	if (loadingPage) return;
-	if (nextPageFirstPanel() == null) {
+	if (newestPageDownloaded >= totalPages()) {
 		if (!$("#noMorePages").length != 0) {
 			$("#pages").append("<div id='noMorePages' class='pageDivStyle'>Hey, you have read all we got for now! Updates are coming weekly...</div>");			
 		}
 		return; // all pages already loaded
 	}
+	if (readCredits() <= 0) {
+		$("#noMoreCredits").addClass("websiteWarningDiv");
+		$("#noMoreCredits").css("visibility", "visible");			
+		return; // all pages already loaded		
+	}
 	loadingPage = true;
 	page = ++newestPageDownloaded;
-	var pp = nextPageFirstPanel();
+//	var pp = nextPageFirstPanel();
+	var pp = firstPanelOnPage(page);
 	$("#pages").append("<div id='pageDiv"+page+"' class='pageDivStyle'><img class='pageDivStyle' id='page"+page+"' src=''></img></div>");
 	$("#page"+page).bind('load', { t: page}, function(event) {
-		var p = nextPageFirstPanel();
+//		var p = nextPageFirstPanel();
 		var data = event.data;
-		console.log("loaded "+data.t);
-		setBrowserStoragePanelNumber(p);
-		$("#navigatorText").html(pageString());
-		console.log("over bottom scrolltop "+parseInt($("#pageDiv"+data.t).position().top));
-		console.log("over bottom height "+parseInt($("#pageDiv"+data.t).height()));
-		console.log("page height "+parseInt(window.innerHeight));
+		var p = firstPanelOnPage(data.t);
 		if (parseInt($("#pageDiv"+data.t).position().top)+parseInt($("#pageDiv"+data.t).height()) > window.innerHeight) {
-			console.log("over bottom"+data.t);
 			$("#pageDiv"+data.t).css("opacity",.05);
 			// $("#pageDiv"+data.t).width(window.innerWidth/2);
+		} else { // reading new page
+			useCredits(panelsOnPage(data.t));
+			setBrowserStoragePanelNumber(firstPanelOnPage(p));
+			window.setTimeout(gaTrack, 2000, ["VIEW"]);
+			$("#navigatorText").html(pageString());
 		}
+			
 		loadingPage = false;
 		checkIfAppendNewPage();
 	});	
-	$("#page"+page).attr('src',(pp <= 0) ? myComic.panels[0].pimage : myComic.panels[pp].pimage);	
-}
-
-function pageString() {
-	return currentPage()+"/"+totalPages();
+	$("#page"+page).attr('src',(pp <= 0) ? myComic.panels[0].pimage : myComic.panels[pp-1].pimage);	
 }
 
 function checkScroll() {
 //	console.log($(window).scrollTop());
 	for (var i=oldestPageRead; i <= newestPageDownloaded; i++) {
 		if (parseInt($(window).scrollTop())+window.innerHeight-100 > parseInt($("#pageDiv"+i).position().top)) {
+			if ($("#pageDiv"+i).css("opacity") != 1) { // reading new page
+				useCredits(panelsOnPage(i)); 
+				setBrowserStoragePanelNumber(firstPanelOnPage(i));	
+				window.setTimeout(gaTrack, 2000, ["VIEW"]);
+				$("#navigatorText").html(pageString());
+			}
 			$("#pageDiv"+i).css("opacity", 1);
 			if (i > newestPageRead) newestPageRead = i;
 		}
@@ -139,7 +128,7 @@ function checkScroll() {
 	if (lastPageRead) return;
 	if (!loadingPage && parseInt($(window).scrollTop())+window.innerHeight+100 > parseInt($("#pageDiv"+newestPageDownloaded).position().top)) {
 		appendNewPage();
-		if (nextPageFirstPanel() == null) lastPageRead = true;
+		if (newestPageRead == totalPages()) lastPageRead = true;
 	}
 }
 
@@ -170,14 +159,14 @@ function pageClicked() {
 	}
 	return false;
 }
-*/
 
 function showPageOfPanel(p) {
 	$("#page"+oldestPageRead).attr('src',(p <= 0) ? myComic.panels[0].pimage : myComic.panels[p].pimage);	
 	setBrowserStoragePanelNumber(p);
 	$("#navigatorText").html(pageString());
 }
-
+*/
+/*
 function nextPageFirstPanel() {
 	var currentPageImage = myComic.panels[(browserStoragePanelNumber() <= 0) ? 0 : browserStoragePanelNumber()-1].pimage;
 	var i = (browserStoragePanelNumber() <= 0) ? 1 : browserStoragePanelNumber()+1;
@@ -186,12 +175,13 @@ function nextPageFirstPanel() {
 	}
 	return (i > myComic.panels.length) ? null : i;		
 }
-
+*/
+/*
 function previousPageFirstPanel() {
 	var change = 0;
 	var panel = browserStoragePanelNumber();
 	var currentPageImage = myComic.panels[(panel <= 0) ? 1 : panel-1].pimage;
-	console.log(currentPageImage);
+//	console.log(currentPageImage);
 	var i = (panel <= 0) ? 1 : panel-1;
 	while ((i > 0 && currentPageImage == myComic.panels[i-1].pimage) || (i > 0 && change < 1)) {
 		if (currentPageImage != myComic.panels[i-1].pimage) {
@@ -201,6 +191,11 @@ function previousPageFirstPanel() {
 		i--;
 	}
 	return i+1;	
+}
+*/
+
+function pageString() {
+	return currentPage()+"/"+totalPages();
 }
 
 function totalPages() {
@@ -218,12 +213,10 @@ function currentPage() {
 	var count = 1;
 	var page = 1;
 	for (var i=2;i<=myComic.panels.length;i++) {
-		console.log("I:"+i+" pimage ");
 		if (previousPageImage != myComic.panels[i-1].pimage) count++;
 		if (browserStoragePanelNumber() == i) page = count;
 		previousPageImage = myComic.panels[i-1].pimage;
 	}
-	console.log("page "+page);
 	return page;		
 }
 
@@ -245,16 +238,51 @@ function imageOfPage(p) {
 	return image;			
 }
 
+function panelsOnPage(p) {
+	var pc = 1;	
+	var panC = 0;
+	var previousPageImage = myComic.panels[0].pimage;
+	for (var i = 2; i <= myComic.panels.length; i++) {
+		if (p == pc) {
+			panC++;			
+		}		
+		if ((previousPageImage != myComic.panels[i-1].pimage)) {
+			pc++;
+			previousPageImage = myComic.panels[i-1].pimage;
+		}
+	}
+	if (p == totalPages()) panC++;
+	return panC;
+}
+
+function firstPanelOnPage(p) {
+	var pc = 1;	
+	var tp = 0;
+	var found = false;
+	var previousPageImage = myComic.panels[0].pimage;
+	for (var i = 2; i <= myComic.panels.length; i++) {
+		if (p == pc && !found) {
+			tp = i;			
+			found = true;
+		}		
+		if ((previousPageImage != myComic.panels[i-1].pimage)) {
+			pc++;
+			previousPageImage = myComic.panels[i-1].pimage;
+		}
+	}
+	tp--;
+	return (tp > 0) ? tp : null;
+}
+
 function setBrowserStoragePanelNumber(p) {
 	if (localStorage.currentPanel2 != undefined) panelPointer = JSON.parse(localStorage.currentPanel2);	
 	if (p < myComic.panels.length && p != null) {
-		panelPointer[currentComic] = p+1;
+		panelPointer[currentComic] = p;
 	} else {
 		console.log("no change for local storage");
 		return;
 	}
 	localStorage.currentPanel2 = JSON.stringify(panelPointer);
-	console.log(localStorage.currentPanel2);
 }
 
 function gup( name ) {
@@ -289,7 +317,7 @@ function browserStoragePanelNumber() {
 	if (localStorage.currentPanel2 == undefined) {
 		return 1;
 	}
-	console.log(localStorage.currentPanel2);
+//	console.log(localStorage.currentPanel2);
 	panelPointer = JSON.parse(localStorage.currentPanel2);
 	if (panelPointer[currentComic] == null) return 1;
 	return panelPointer[currentComic];
