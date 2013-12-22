@@ -5,8 +5,14 @@ var comicFolder;
 var panelPointer = [];
 var currentComic = "0";
 var pageCounter = 0;
+var oldestPageRead =  0;
+var newestPageRead = 0;
+var oldestPageDownloaded = 0;
+var newestPageDownloaded = 0;
 var loadingPage = false;
+var loadingOlderPage = false;
 var lastPageRead = false;
+var scrollSet = false;
 
 function init() {
 	if(!window.console){ window.console = {log: function(){} }; } 
@@ -17,36 +23,84 @@ function init() {
 }
 
 function continueInit() {
-	$("#pages").append("<div id='pageDiv' onClick='pageClicked()'><img style='width:100%;' id='page' src=''></img></div>");
-	$("#pageDiv").css('text-align', 'center');
-	$("#page").attr('src',(browserStoragePanelNumber() <= 0) ? myComic.panels[0].pimage : myComic.panels[browserStoragePanelNumber()-1].pimage);
+	newestPageRead = currentPage();
+	oldestPageRead = currentPage();
+	newestPageDownloaded = currentPage();
+	oldestPageDownloaded = currentPage();
+	$("#pages").append("<div id='pageDiv"+newestPageRead+"' class='pageDivStyle'><img class='pageDivStyle' id='page"+newestPageRead+"' src=''></img></div>");
+	$("#pageDiv"+newestPageRead).css('text-align', 'center');
+	$("#page"+newestPageRead).attr('src',(browserStoragePanelNumber() <= 0) ? myComic.panels[0].pimage : myComic.panels[browserStoragePanelNumber()-1].pimage);
 	$("#navigatorText").html(pageString());
 	window.setTimeout(gaTrack, 500, ["VIEW"]);
 	appendNewPage();
-	window.setTimeout(setScroll, 1000);
+	window.setTimeout(setScroll, 50);
 //	$(document).scrollTop(100); // does not work???
 	$(window).scroll(function() { checkScroll(); });	
 }
 
 function setScroll() {
-	window.scrollTo(0,100);	
-	console.log("setscroll");
+	window.scrollTo(0,50);	
+	scrollSet = true;
+//	console.log("setscroll");
 }
 
 function checkIfAppendNewPage() {
-	if (pageCounter < 3) {
-		pageCounter++;
+//	if (pageCounter < 3) {
+//		pageCounter++;
+//		appendNewPage();
+//	}
+	if ($("#pageDiv"+newestPageDownloaded).position().top < window.innerHeight) {
 		appendNewPage();
 	}
 }
 
+function prependPreviousPage() {
+	if (loadingOlderPage) return;
+	if (oldestPageDownloaded <= 1) return; // back on the first page
+	console.log("opd"+oldestPageDownloaded);
+	console.log("npd"+newestPageDownloaded);
+	console.log("opr"+oldestPageRead);
+	console.log("npr"+newestPageRead);
+	loadingOlderPage = true;
+	page = --oldestPageDownloaded;	
+//	var pp = previousPageFirstPanel();
+	$("#pages").prepend("<div id='pageDiv"+page+"' class='pageDivStyle'><img class='pageDivStyle' id='page"+page+"' src=''></img></div>");
+	$("#page"+page).bind('load', { t: page}, function(event) {
+//		var p = previousPageFirstPanel();
+//		var data = event.data;
+//		console.log("loaded "+data.t);
+//		setBrowserStoragePanelNumber(p);
+//		$("#navigatorText").html(pageString());
+/*		if (parseInt($("#pageDiv"+data.t).position().top)+parseInt($("#pageDiv"+data.t).height()) > window.innerHeight) {
+			console.log("over bottom"+data.t);
+			$("#pageDiv"+data.t).css("opacity",.05);
+			// $("#pageDiv"+data.t).width(window.innerWidth/2);
+		}
+*/		
+		setScroll();
+		window.setTimeout(allowLoadingOlderPage, 300);
+//		checkIfAppendNewPage();
+	});	
+	$("#page"+page).attr('src', imageOfPage(page));		
+}
+
+function allowLoadingOlderPage() {
+	loadingOlderPage = false;
+}
+
 function appendNewPage() {
 	if (loadingPage) return;
-	if (nextPageFirstPanel() == null) return; // all pages already loaded
+	if (nextPageFirstPanel() == null) {
+		if (!$("#noMorePages").length != 0) {
+			$("#pages").append("<div id='noMorePages' class='pageDivStyle'>Hey, you have read all we got for now! Updates are coming weekly...</div>");			
+		}
+		return; // all pages already loaded
+	}
 	loadingPage = true;
+	page = ++newestPageDownloaded;
 	var pp = nextPageFirstPanel();
-	$("#pages").append("<div id='pageDiv"+pageCounter+"' onClick='pageClicked()'><img style='width:100%;' id='page"+pageCounter+"' src=''></img></div>");
-	$("#page"+pageCounter).bind('load', { t: pageCounter}, function(event) {
+	$("#pages").append("<div id='pageDiv"+page+"' class='pageDivStyle'><img class='pageDivStyle' id='page"+page+"' src=''></img></div>");
+	$("#page"+page).bind('load', { t: page}, function(event) {
 		var p = nextPageFirstPanel();
 		var data = event.data;
 		console.log("loaded "+data.t);
@@ -63,7 +117,7 @@ function appendNewPage() {
 		loadingPage = false;
 		checkIfAppendNewPage();
 	});	
-	$("#page"+pageCounter).attr('src',(pp <= 0) ? myComic.panels[0].pimage : myComic.panels[pp].pimage);	
+	$("#page"+page).attr('src',(pp <= 0) ? myComic.panels[0].pimage : myComic.panels[pp].pimage);	
 }
 
 function pageString() {
@@ -72,19 +126,24 @@ function pageString() {
 
 function checkScroll() {
 //	console.log($(window).scrollTop());
-	for (var i=0; i < pageCounter; i++) {
-		if (parseInt($(window).scrollTop())+window.innerHeight-150 > parseInt($("#pageDiv"+i).position().top)) $("#pageDiv"+i).css("opacity", 1);
+	for (var i=oldestPageRead; i <= newestPageDownloaded; i++) {
+		if (parseInt($(window).scrollTop())+window.innerHeight-100 > parseInt($("#pageDiv"+i).position().top)) {
+			$("#pageDiv"+i).css("opacity", 1);
+			if (i > newestPageRead) newestPageRead = i;
+		}
 	}	
-	console.log("page counter "+pageCounter);
-	if ($(window).scrollTop() <= 10) console.log("top");
+//	if ($(window).scrollTop() <= 10) console.log("top");
+	if (!loadingPage && parseInt($(window).scrollTop()) < 40) {
+		prependPreviousPage();
+	}
 	if (lastPageRead) return;
-	if (!loadingPage && parseInt($(window).scrollTop())+window.innerHeight+100 > parseInt($("#pageDiv"+pageCounter).position().top)) {
-		pageCounter++;
+	if (!loadingPage && parseInt($(window).scrollTop())+window.innerHeight+100 > parseInt($("#pageDiv"+newestPageDownloaded).position().top)) {
 		appendNewPage();
 		if (nextPageFirstPanel() == null) lastPageRead = true;
 	}
 }
 
+/*
 function pageClicked() {
 	gaTrack("READ");
 	var selection = "";
@@ -111,29 +170,37 @@ function pageClicked() {
 	}
 	return false;
 }
+*/
 
 function showPageOfPanel(p) {
-	$("#page").attr('src',(p <= 0) ? myComic.panels[0].pimage : myComic.panels[p].pimage);	
+	$("#page"+oldestPageRead).attr('src',(p <= 0) ? myComic.panels[0].pimage : myComic.panels[p].pimage);	
 	setBrowserStoragePanelNumber(p);
 	$("#navigatorText").html(pageString());
 }
 
 function nextPageFirstPanel() {
-	var previousPage = myComic.panels[(browserStoragePanelNumber() <= 0) ? 0 : browserStoragePanelNumber()-1].pimage;
-	var i = (browserStoragePanelNumber() <= 0) ? 0 : browserStoragePanelNumber()-1;
-	while (i < myComic.panels.length && previousPage == myComic.panels[i].pimage) {
+	var currentPageImage = myComic.panels[(browserStoragePanelNumber() <= 0) ? 0 : browserStoragePanelNumber()-1].pimage;
+	var i = (browserStoragePanelNumber() <= 0) ? 1 : browserStoragePanelNumber()+1;
+	while (i <= myComic.panels.length && currentPageImage == myComic.panels[i-1].pimage) {
 		i++;
 	}
-	return (i == myComic.panels.length) ? null : i;		
+	return (i > myComic.panels.length) ? null : i;		
 }
 
 function previousPageFirstPanel() {
-	var currentPage = myComic.panels[(browserStoragePanelNumber() <= 0) ? 0 : browserStoragePanelNumber()-1].pimage;
-	var i = (browserStoragePanelNumber() <= 0) ? 0 : browserStoragePanelNumber()-1;
-	while (i > 0 && currentPage == myComic.panels[i].pimage) {
+	var change = 0;
+	var panel = browserStoragePanelNumber();
+	var currentPageImage = myComic.panels[(panel <= 0) ? 1 : panel-1].pimage;
+	console.log(currentPageImage);
+	var i = (panel <= 0) ? 1 : panel-1;
+	while ((i > 0 && currentPageImage == myComic.panels[i-1].pimage) || (i > 0 && change < 1)) {
+		if (currentPageImage != myComic.panels[i-1].pimage) {
+			change++;
+			currentPageImage = myComic.panels[i-1].pimage;
+		}
 		i--;
 	}
-	return i;
+	return i+1;	
 }
 
 function totalPages() {
@@ -147,16 +214,35 @@ function totalPages() {
 }
 
 function currentPage() {
-	var previousPage = "empty";
-	var count = 0;
-	var page = 0;
-	for (var i=0;i<myComic.panels.length;i++) {
-		if (previousPage != myComic.panels[i].pimage) count++;
+	var previousPageImage = myComic.panels[0].pimage;
+	var count = 1;
+	var page = 1;
+	for (var i=2;i<=myComic.panels.length;i++) {
+		console.log("I:"+i+" pimage ");
+		if (previousPageImage != myComic.panels[i-1].pimage) count++;
 		if (browserStoragePanelNumber() == i) page = count;
-		previousPage = myComic.panels[i].pimage;
+		previousPageImage = myComic.panels[i-1].pimage;
 	}
 	console.log("page "+page);
 	return page;		
+}
+
+function imageOfPage(p) {
+	var found = false;
+	var image = null;
+	var previousPageImage = myComic.panels[0].pimage;
+	var cc = 1;
+	for (var i = 1; i <= myComic.panels.length; i++) {
+		if (p == cc && !found) {
+			image = myComic.panels[i-1].pimage;
+			found = true;
+		}
+		if ((previousPageImage != myComic.panels[i-1].pimage)) {
+			cc++;
+			previousPageImage = myComic.panels[i-1].pimage;
+		}
+	}
+	return image;			
 }
 
 function setBrowserStoragePanelNumber(p) {

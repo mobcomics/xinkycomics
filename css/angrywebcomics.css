@@ -88,6 +88,29 @@
 
 .previousPageLoadStyle {
 	background-color: #555;	
-	height: 30px;
+	height: 50px;
 	width: 100%;	
+}
+
+.pageDivStyle {
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	border: 0px;
+	width:100%;
+}
+
+.websiteWarningDiv {
+	text-align: center;	
+	padding: 30px;
+	visibility: hidden;	
+}
+
+.smallPrintStyle {
+	font-size: x-small;
+}
+
+.scrollerStyle {
+	width:100%;
+	visibility: hidden;
 }

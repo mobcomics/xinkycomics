@@ -31,6 +31,13 @@ function continueInit() {
 	    imageLoaded(i, p);
 	};
 	window.setTimeout(gaTrack, 500);
+	if (isWebsiteOK()) {
+		viewWebsite();
+	}
+	else {
+		$('#websiteWarning').css("visibility", "visible");
+		$("#websiteWarningText").html(fullWebWarning);		
+	}
 }
 
 function imageLoaded(i, p) {
@@ -45,13 +52,6 @@ function imageLoaded(i, p) {
 		background: "url('" + p.pimage + "')",
 		backgroundPosition: -x*p.subImage.x+"px " + -x*p.subImage.y + "px"
 	});	
-	window.setTimeout(loadIframe, 100);  // download the iframe page last
-}
-
-function loadIframe() {
-	var c = comics.comicsList[(gup("comic")) ? gup("comic") : 0];	
-	$("#actualFrame").attr("src", c.creatorUrl);
-//	$('#scroller').css({'overflow' : 'scroll', '-webkit-overflow-scrolling' : 'touch'}); // breaks the app		
 }
 
 function resizeIframe() {
@@ -60,6 +60,27 @@ function resizeIframe() {
 	$("#actualFrame").css("width", window.innerWidth);	
 //	$("#scroller").css("width", $("#body").innerWidth()+"px");	
 //	$("#actualFrame").css("width", $("#body").innerWidth()+"px");	
+}
+
+function isWebsiteOK() {
+	if (localStorage.webok == undefined) {
+		return false;
+	} else return true;
+}
+
+function viewWebsite() {
+	window.setTimeout(loadWebsite, 2000);	
+	$('#scroller').css("visibility", "visible");	
+	$('#websiteWarning').css("visibility", "hidden");
+	$('#websiteWarning').css("height", "0px");
+	$('#websiteWarning').css("padding", "0px");	
+	localStorage.webok = true;
+//	$('#scroller').css({'overflow' : 'scroll', '-webkit-overflow-scrolling' : 'touch'}); // breaks the app			
+}
+
+function loadWebsite() {
+	var c = comics.comicsList[(gup("comic")) ? gup("comic") : 0];	
+	$("#actualFrame").attr("src", c.creatorUrl);	
 }
 
 function gup( name ) {
